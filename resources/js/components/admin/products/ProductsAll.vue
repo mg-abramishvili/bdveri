@@ -26,7 +26,7 @@
                         {{ product.base_price }}
                     </td>
                     <td style="text-align: right;">
-                        <button class="btn btn-sm btn-warning">Изменить</button>
+                        <router-link :to="{ name: 'ProductEdit', params: { id: product.id }}" class="btn btn-sm btn-warning">Изменить</router-link>
                     </td>
                 </tr>
             </tbody>

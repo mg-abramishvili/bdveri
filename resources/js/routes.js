@@ -1,6 +1,7 @@
 import Home from './components/front/home/Home.vue';
 import Products from './components/admin/products/ProductsAll.vue';
 import ProductCreate from './components/admin/products/ProductCreate.vue';
+import ProductEdit from './components/admin/products/ProductEdit.vue';
 import TempFiles from './components/admin/temp_files/TempFiles.vue';
 
 export const routes = [
@@ -18,6 +19,11 @@ export const routes = [
         path: '/admin/products/create',
         name: 'ProductCreate',
         component: ProductCreate
+    },
+    {
+        path: '/admin/products/:id/edit',
+        name: 'ProductEdit',
+        component: ProductEdit
     },
     {
         path: '/admin/temp_files',

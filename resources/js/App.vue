@@ -6,7 +6,7 @@
         </template>
 
         <template
-            v-if="$route.name === 'Products' || $route.name === 'ProductCreate' || $route.name === 'TempFiles'">
+            v-if="$route.name === 'Products' || $route.name === 'ProductCreate' || $route.name === 'ProductEdit' || $route.name === 'TempFiles'">
             <AdminLayout />
         </template>
     </div>

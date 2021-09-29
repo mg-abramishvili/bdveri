@@ -3,8 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('products','App\Http\Controllers\ProductController@index');
-Route::post('products','App\Http\Controllers\ProductController@store');
+Route::get('products','App\Http\Controllers\ProductController@products_index');
+Route::get('product/{id}','App\Http\Controllers\ProductController@product_item');
+Route::post('products','App\Http\Controllers\ProductController@products_store');
+Route::post('product/{id}/update','App\Http\Controllers\ProductController@product_update');
 
 Route::post('upload','App\Http\Controllers\UploadController@store');
 Route::delete('upload','App\Http\Controllers\UploadController@delete');

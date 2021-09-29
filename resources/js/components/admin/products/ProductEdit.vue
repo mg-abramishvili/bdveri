@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Новый товар</h1>
+        <h1>{{ product.name }}</h1>
 
         <div class="mb-3">
             <label class="form-label">Название</label>
@@ -22,7 +22,7 @@
             <textarea v-model="description" rows="5" class="form-control"></textarea>
         </div>
 
-        <button @click="saveProduct()" class="btn btn-primary">Добавить</button>
+        <button @click="saveProduct(product.id)" class="btn btn-primary">Добавить</button>
     </div>
 </template>
 
@@ -30,6 +30,7 @@
     export default {
         data() {
             return {
+                product: {},
                 name: '',
                 base_price: '',
                 old_price: '',
@@ -37,13 +38,21 @@
             }
         },
         created() {
-            
+            axios
+                .get(`/api/product/${this.$route.params.id}`)
+                .then(response => (
+                    this.product = response.data,
+                    this.name = response.data.name,
+                    this.base_price = response.data.base_price,
+                    this.old_price = response.data.old_price,
+                    this.description = response.data.description
+                ));
         },
         methods: {
-            saveProduct() {
+            saveProduct($id) {
                 if(this.name.length > 0 && this.base_price.length > 0) {
                     axios
-                    .post(`/api/products`, { name: this.name, base_price: this.base_price, old_price: this.old_price, description: this.description })
+                    .post(`/api/product/${$id}/update`, { name: this.name, base_price: this.base_price, old_price: this.old_price, description: this.description })
                     .then(response => (
                         this.$router.push({name: 'Products' })
                     ))
