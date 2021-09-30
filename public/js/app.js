@@ -2374,6 +2374,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -42933,13 +42935,21 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("td", [
-                  _vm._v(
-                    "\n                            " +
-                      _vm._s(product_color.price) +
-                      "\n                        "
-                  )
-                ]),
+                _c(
+                  "td",
+                  [
+                    product_color.price
+                      ? [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(product_color.price) +
+                              " ₽\n                            "
+                          )
+                        ]
+                      : _vm._e()
+                  ],
+                  2
+                ),
                 _vm._v(" "),
                 _c("td", { staticStyle: { "text-align": "right" } }, [
                   _c(

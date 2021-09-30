@@ -47,7 +47,9 @@
                                 {{ product_color.name }}
                             </td>
                             <td>
-                                {{ product_color.price }}
+                                <template v-if="product_color.price">
+                                    {{ product_color.price }} ₽
+                                </template>
                             </td>
                             <td style="text-align: right;">
                                 <button @click="EditColor(product_color.id), edit_color_id = product_color.id" class="btn btn-sm btn-outline-secondary">Изменить</button>
