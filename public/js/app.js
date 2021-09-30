@@ -2242,6 +2242,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vue_filepond__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-filepond */ "./node_modules/vue-filepond/dist/vue-filepond.js");
+/* harmony import */ var vue_filepond__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_filepond__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var filepond_dist_filepond_min_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! filepond/dist/filepond.min.css */ "./node_modules/filepond/dist/filepond.min.css");
+/* harmony import */ var filepond_plugin_image_preview_dist_filepond_plugin_image_preview_min_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css */ "./node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css");
+/* harmony import */ var filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! filepond-plugin-file-validate-type */ "./node_modules/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js");
+/* harmony import */ var filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! filepond-plugin-image-preview */ "./node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js");
+/* harmony import */ var filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_4__);
 //
 //
 //
@@ -2270,6 +2278,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_3___default()), (filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_4___default()));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2277,7 +2312,11 @@ __webpack_require__.r(__webpack_exports__);
       name: '',
       base_price: '',
       old_price: '',
-      description: ''
+      description: '',
+      new_color_name: '',
+      new_color_price: '',
+      new_color_image: '',
+      color_filepond_files: []
     };
   },
   created: function created() {
@@ -2312,9 +2351,37 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         alert('Заполните поля');
       }
+    },
+    saveColor: function saveColor($id) {
+      var _this3 = this;
+
+      this.new_color_image = document.getElementsByName("new_color_image")[0].value;
+
+      if (this.new_color_name.length) {
+        axios.post("/api/product/".concat($id, "/add_color"), {
+          color_name: this.new_color_name,
+          color_price: this.new_color_price,
+          color_image: this.new_color_image
+        }).then(function (response) {
+          return _this3.$router.push({
+            name: 'Products'
+          });
+        })["catch"](function (error) {
+          if (error.response) {
+            for (var key in error.response.data.errors) {
+              console.log(key);
+              alert(key);
+            }
+          }
+        });
+      } else {
+        alert('Заполните поля');
+      }
     }
   },
-  components: {}
+  components: {
+    FilePond: FilePond
+  }
 });
 
 /***/ }),
@@ -42535,122 +42602,183 @@ var render = function() {
   return _c("div", [
     _c("h1", [_vm._v(_vm._s(_vm.product.name))]),
     _vm._v(" "),
-    _c("div", { staticClass: "mb-3" }, [
-      _c("label", { staticClass: "form-label" }, [_vm._v("Название")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.name,
-            expression: "name"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text" },
-        domProps: { value: _vm.name },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-12 col-md-4" }, [
+        _c("div", { staticClass: "mb-3" }, [
+          _c("label", { staticClass: "form-label" }, [_vm._v("Название")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.name,
+                expression: "name"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text" },
+            domProps: { value: _vm.name },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.name = $event.target.value
+              }
             }
-            _vm.name = $event.target.value
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "mb-3" }, [
-      _c("label", { staticClass: "form-label" }, [_vm._v("Базовая цена")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.base_price,
-            expression: "base_price"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text" },
-        domProps: { value: _vm.base_price },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-3" }, [
+          _c("label", { staticClass: "form-label" }, [_vm._v("Базовая цена")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.base_price,
+                expression: "base_price"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text" },
+            domProps: { value: _vm.base_price },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.base_price = $event.target.value
+              }
             }
-            _vm.base_price = $event.target.value
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "mb-3" }, [
-      _c("label", { staticClass: "form-label" }, [_vm._v("Старая цена")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.old_price,
-            expression: "old_price"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text" },
-        domProps: { value: _vm.old_price },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-3" }, [
+          _c("label", { staticClass: "form-label" }, [_vm._v("Старая цена")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.old_price,
+                expression: "old_price"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text" },
+            domProps: { value: _vm.old_price },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.old_price = $event.target.value
+              }
             }
-            _vm.old_price = $event.target.value
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "mb-3" }, [
-      _c("label", { staticClass: "form-label" }, [_vm._v("Описание")]),
-      _vm._v(" "),
-      _c("textarea", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.description,
-            expression: "description"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { rows: "5" },
-        domProps: { value: _vm.description },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-3" }, [
+          _c("label", { staticClass: "form-label" }, [_vm._v("Описание")]),
+          _vm._v(" "),
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.description,
+                expression: "description"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { rows: "5" },
+            domProps: { value: _vm.description },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.description = $event.target.value
+              }
             }
-            _vm.description = $event.target.value
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-primary",
-        on: {
-          click: function($event) {
-            return _vm.saveProduct(_vm.product.id)
-          }
-        }
-      },
-      [_vm._v("Добавить")]
-    )
+          })
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            on: {
+              click: function($event) {
+                return _vm.saveProduct(_vm.product.id)
+              }
+            }
+          },
+          [_vm._v("Сохранить")]
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "col-12 col-md-8" },
+        [
+          _c("file-pond", {
+            ref: "new_color_image",
+            attrs: {
+              name: "new_color_image",
+              "label-idle": "Выбрать картинку...",
+              "allow-multiple": "false",
+              "accepted-file-types": "image/jpeg, image/png",
+              server: "/api/product/add_color_image_upload",
+              files: _vm.color_filepond_files
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "mb-3" }, [
+            _c("label", { staticClass: "form-label" }, [_vm._v("Цвет")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.new_color_name,
+                  expression: "new_color_name"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text" },
+              domProps: { value: _vm.new_color_name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.new_color_name = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              on: {
+                click: function($event) {
+                  return _vm.saveColor(_vm.product.id)
+                }
+              }
+            },
+            [_vm._v("Добавить цвет")]
+          )
+        ],
+        1
+      )
+    ])
   ])
 }
 var staticRenderFns = []

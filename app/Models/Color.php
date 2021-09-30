@@ -5,19 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Color extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'base_price',
-        'old_price',
-        'description',
+        'name',
+        'price',
+        'image'
     ];
 
-    public function colors()
+    public function products()
     {
-        return $this->belongsToMany('App\Models\Color');
+        return $this->belongsToMany('App\Models\Product');
     }
 }

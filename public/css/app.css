@@ -7,3 +7,7 @@
 .filepond--root .filepond--credits {
     display: none;
 }
+
+.table tr td {
+    vertical-align: middle;
+}

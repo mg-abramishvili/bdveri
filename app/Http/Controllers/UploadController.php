@@ -12,7 +12,7 @@ class UploadController extends Controller
             $file = $request->file('avatar');
             $filename = $file->getClientOriginalName();
             $folder = uniqid() . '-' . now()->timestamp;
-            $file->storeAs('avatars/' . $folder, $filename);
+            $file->storeAs('tmp/' . $folder, $filename);
 
             TemporaryFile::create([
                 'folder' => $folder,
@@ -36,7 +36,7 @@ class UploadController extends Controller
     public function temp_files_delete($id, Request $request) {
         $file = TemporaryFile::find($id);
         $file->delete();
-        unlink(storage_path('app/avatars/' . $file->folder . '/' . $file->filename));
-        rmdir(storage_path('app/avatars/' . $file->folder));
+        unlink(public_path('temp_uploads/' . $file->folder . '/' . $file->filename));
+        rmdir(public_path('temp_uploads/' . $file->folder));
     }
 }
