@@ -33,11 +33,11 @@
                         <label class="form-label mb-0">Цвета</label>
                     </div>
                     <div class="col-6 text-end">
-                        <button @click="modal_add_new_color = true" class="btn btn-sm btn-outline-primary">Добавить цвет</button>
+                        <button @click="modal_add_new_color = true" class="btn btn-sm btn-primary">Добавить цвет</button>
                     </div>
                 </div>
 
-                <table class="table table-striped table-hover">
+                <table class="table table-hover">
                     <tbody>
                         <tr v-for="product_color in product.colors" :key="'product_color_' + product_color.id">
                             <td style="width: 100px;">
@@ -45,6 +45,12 @@
                             </td>
                             <td>
                                 {{ product_color.name }}
+                            </td>
+                            <td>
+                                {{ product_color.price }}
+                            </td>
+                            <td style="text-align: right;">
+                                <button @click="EditColor(product_color.id), edit_color_id = product_color.id" class="btn btn-sm btn-outline-secondary">Изменить</button>
                             </td>
                         </tr>
                     </tbody>
@@ -62,7 +68,7 @@
                                     name="new_color_image"
                                     ref="new_color_image"
                                     label-idle="Выбрать картинку..."
-                                    allow-multiple="false"
+                                    v-bind:allow-multiple="false"
                                     accepted-file-types="image/jpeg, image/png"
                                     server="/api/product/add_color_image_upload"
                                     v-bind:files="color_filepond_files"
@@ -71,7 +77,40 @@
                                     <label class="form-label">Цвет</label>
                                     <input v-model="new_color_name" type="text" class="form-control">
                                 </div>
-                                <button @click="saveColor(product.id)">Добавить цвет</button>
+                                <button @click="saveColor(product.id)" class="btn btn-primary">Добавить цвет</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div v-if="modal_edit_color" class="modal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Изменить цвет</h5>
+                                <button @click="close_edit_color_modal()" type="button" class="btn-close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <file-pond
+                                    name="edit_color_image"
+                                    ref="edit_color_image"
+                                    label-idle="Выбрать картинку..."
+                                    v-bind:allow-multiple="false"
+                                    accepted-file-types="image/jpeg, image/png"
+                                    :server="server"
+                                    v-bind:files="color_filepond_files_edit"
+                                />
+                                <div class="row mb-4">
+                                    <div class="col-8">
+                                        <label class="form-label">Цвет</label>
+                                        <input v-model="edit_color_name" type="text" class="form-control">
+                                    </div>
+                                    <div class="col-4">
+                                        <label class="form-label">Цена</label>
+                                        <input v-model="edit_color_price" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <button @click="updateColor(edit_color_id)" class="btn btn-primary">Сохранить</button>
                             </div>
                         </div>
                     </div>
@@ -112,7 +151,57 @@
                 new_color_price: '',
                 new_color_image: '',
                 color_filepond_files: [],
+                
+                modal_edit_color: false,
+                edit_color_id: '',
+                edit_color_name: '',
+                edit_color_price: '',
+                edit_color_image: '',
+                color_filepond_files_edit: [
+                    {
+                        source: '1',
+                        options: {
+                            type: 'local',
+                        }
+                    }
+                ],
 
+                server: {
+                    remove(filename, load) {
+                        load('1');
+                    },
+                    process(fieldName, file, metadata, load, error, progress, abort, transfer, options) {
+                        const formData = new FormData();
+                        formData.append(fieldName, file, file.name);
+                        const request = new XMLHttpRequest();
+                        request.open('POST', '/api/product/add_color_image_upload');
+                        request.upload.onprogress = (e) => {
+                            progress(e.lengthComputable, e.loaded, e.total);
+                        };
+                        request.onload = function () {
+                            if (request.status >= 200 && request.status < 300) {
+                                load(request.responseText);
+                            } else {
+                                error('oh no');
+                            }
+                        };
+                        request.send(formData);
+                        return {
+                            abort: () => {
+                                request.abort();
+                                abort();
+                            },
+                        };
+                    },
+                    load(source, load, error, progress, abort, headers) {
+                        var myRequest = new Request(source);
+                        fetch(myRequest).then(function(response) {
+                            response.blob().then(function(myBlob) {
+                                load(myBlob)
+                            });
+                        });
+                    },
+                },
             }
         },
         created() {
@@ -151,7 +240,7 @@
             },
             saveColor($id) {
                 this.new_color_image = document.getElementsByName("new_color_image")[0].value
-                if(this.new_color_name.length) {
+                if(this.new_color_name.length && this.new_color_image) {
                     axios
                     .post(`/api/product/${$id}/add_color`, { color_name: this.new_color_name, color_price: this.new_color_price, color_image: this.new_color_image })
                     .then(response => (
@@ -170,12 +259,58 @@
                     alert('Заполните поля')
                 }
             },
+            EditColor(id) {
+                this.modal_edit_color = true
+                axios
+                .get(`/api/color/${id}`)
+                .then(response => (
+                    this.edit_color_name = response.data.name,
+                    this.edit_color_price = response.data.price,
+                    this.color_filepond_files_edit = [
+                        {
+                            source: response.data.image,
+                            options: {
+                                type: 'local',
+                            }
+                        }
+                    ]
+                ));
+            },
+            updateColor(id) {
+                this.edit_color_image = document.getElementsByName("edit_color_image")[0].value
+                if(this.edit_color_name.length && this.edit_color_image.length) {
+                    axios
+                    .post(`/api/color/${id}/update`, { color_name: this.edit_color_name, color_price: this.edit_color_price, color_image: this.edit_color_image })
+                    .then(response => (
+                        this.getProductInfo(),
+                        this.close_edit_color_modal()
+                    ))
+                    .catch((error) => {
+                        if(error.response) {
+                            for(var key in error.response.data.errors){
+                                console.log(key)
+                                alert(key)
+                            }
+                        }
+                    });
+                } else {
+                    alert('Заполните поля')
+                }
+            },
             close_add_color_modal() {
                 this.modal_add_new_color = false,
                 this.new_color_name = '',
                 this.new_color_price = '',
-                this.new_color_image = ''
-            }
+                this.new_color_image = '',
+                this.color_filepond_files = []
+            },
+            close_edit_color_modal() {
+                this.modal_edit_color = false,
+                this.edit_color_name = '',
+                this.edit_color_price = '',
+                this.edit_color_image = '',
+                this.color_filepond_files_edit = []
+            },
         },
         components: {
             FilePond,

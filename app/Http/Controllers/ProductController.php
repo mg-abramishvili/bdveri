@@ -57,6 +57,11 @@ class ProductController extends Controller
         $product->save();
     }
 
+    public function color_item($id)
+    {
+        return Color::find($id);
+    }
+
     public function add_color($id, Request $request) {
         $data = request()->all();
         $product = Product::find($id);
@@ -77,9 +82,38 @@ class ProductController extends Controller
         $product->colors()->attach($color->id, ['product_id' => $product->id]);
     }
 
+    public function update_color($id, Request $request) {
+        $data = request()->all();
+        $color = Color::find($id);
+
+        if(TemporaryFile::where('folder', $data['color_image'])->first()) {
+            $temp_file = TemporaryFile::where('folder', $data['color_image'])->first();
+            rename(public_path() . '/temp_uploads/' . $temp_file->folder . '/' . $temp_file->filename, public_path() . '/uploads/' . now()->timestamp . '_' . $temp_file->filename);
+            rmdir(public_path('temp_uploads/' . $temp_file->folder));
+            $temp_file->delete();
+            $color->name = $data['color_name'];
+            $color->price = $data['color_price'];
+            $color->image = '/uploads/' . now()->timestamp . '_' . $temp_file->filename;
+        } else {
+            $color->name = $data['color_name'];
+            $color->price = $data['color_price'];
+            $color->image = $data['color_image'];
+        }
+
+        $color->save();
+    }
+
     public function add_color_image_store(Request $request) {
-        if($request->hasFile('new_color_image')) {
-            $file = $request->file('new_color_image');
+        if($request->hasFile('new_color_image') || $request->hasFile('edit_color_image')) {
+            
+            if($request->hasFile('new_color_image')) {
+                $file = $request->file('new_color_image');
+            }
+
+            if($request->hasFile('edit_color_image')) {
+                $file = $request->file('edit_color_image');
+            }
+
             $filename = $file->getClientOriginalName();
             $folder = uniqid() . '-' . now()->timestamp;
             $file->move(public_path() . '/temp_uploads/' . $folder, $filename);
@@ -94,4 +128,5 @@ class ProductController extends Controller
 
         return '';
     }
+
 }

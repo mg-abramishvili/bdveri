@@ -2335,6 +2335,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2353,7 +2392,58 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
       new_color_name: '',
       new_color_price: '',
       new_color_image: '',
-      color_filepond_files: []
+      color_filepond_files: [],
+      modal_edit_color: false,
+      edit_color_id: '',
+      edit_color_name: '',
+      edit_color_price: '',
+      edit_color_image: '',
+      color_filepond_files_edit: [{
+        source: '1',
+        options: {
+          type: 'local'
+        }
+      }],
+      server: {
+        remove: function remove(filename, load) {
+          load('1');
+        },
+        process: function process(fieldName, file, metadata, load, error, progress, _abort, transfer, options) {
+          var formData = new FormData();
+          formData.append(fieldName, file, file.name);
+          var request = new XMLHttpRequest();
+          request.open('POST', '/api/product/add_color_image_upload');
+
+          request.upload.onprogress = function (e) {
+            progress(e.lengthComputable, e.loaded, e.total);
+          };
+
+          request.onload = function () {
+            if (request.status >= 200 && request.status < 300) {
+              load(request.responseText);
+            } else {
+              error('oh no');
+            }
+          };
+
+          request.send(formData);
+          return {
+            abort: function abort() {
+              request.abort();
+
+              _abort();
+            }
+          };
+        },
+        load: function load(source, _load, error, progress, abort, headers) {
+          var myRequest = new Request(source);
+          fetch(myRequest).then(function (response) {
+            response.blob().then(function (myBlob) {
+              _load(myBlob);
+            });
+          });
+        }
+      }
     };
   },
   created: function created() {
@@ -2397,7 +2487,7 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
 
       this.new_color_image = document.getElementsByName("new_color_image")[0].value;
 
-      if (this.new_color_name.length) {
+      if (this.new_color_name.length && this.new_color_image) {
         axios.post("/api/product/".concat($id, "/add_color"), {
           color_name: this.new_color_name,
           color_price: this.new_color_price,
@@ -2416,8 +2506,48 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
         alert('Заполните поля');
       }
     },
+    EditColor: function EditColor(id) {
+      var _this4 = this;
+
+      this.modal_edit_color = true;
+      axios.get("/api/color/".concat(id)).then(function (response) {
+        return _this4.edit_color_name = response.data.name, _this4.edit_color_price = response.data.price, _this4.color_filepond_files_edit = [{
+          source: response.data.image,
+          options: {
+            type: 'local'
+          }
+        }];
+      });
+    },
+    updateColor: function updateColor(id) {
+      var _this5 = this;
+
+      this.edit_color_image = document.getElementsByName("edit_color_image")[0].value;
+
+      if (this.edit_color_name.length && this.edit_color_image.length) {
+        axios.post("/api/color/".concat(id, "/update"), {
+          color_name: this.edit_color_name,
+          color_price: this.edit_color_price,
+          color_image: this.edit_color_image
+        }).then(function (response) {
+          return _this5.getProductInfo(), _this5.close_edit_color_modal();
+        })["catch"](function (error) {
+          if (error.response) {
+            for (var key in error.response.data.errors) {
+              console.log(key);
+              alert(key);
+            }
+          }
+        });
+      } else {
+        alert('Заполните поля');
+      }
+    },
     close_add_color_modal: function close_add_color_modal() {
-      this.modal_add_new_color = false, this.new_color_name = '', this.new_color_price = '', this.new_color_image = '';
+      this.modal_add_new_color = false, this.new_color_name = '', this.new_color_price = '', this.new_color_image = '', this.color_filepond_files = [];
+    },
+    close_edit_color_modal: function close_edit_color_modal() {
+      this.modal_edit_color = false, this.edit_color_name = '', this.edit_color_price = '', this.edit_color_image = '', this.color_filepond_files_edit = [];
     }
   },
   components: {
@@ -42771,7 +42901,7 @@ var render = function() {
             _c(
               "button",
               {
-                staticClass: "btn btn-sm btn-outline-primary",
+                staticClass: "btn btn-sm btn-primary",
                 on: {
                   click: function($event) {
                     _vm.modal_add_new_color = true
@@ -42783,7 +42913,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("table", { staticClass: "table table-striped table-hover" }, [
+        _c("table", { staticClass: "table table-hover" }, [
           _c(
             "tbody",
             _vm._l(_vm.product.colors, function(product_color) {
@@ -42800,6 +42930,30 @@ var render = function() {
                     "\n                            " +
                       _vm._s(product_color.name) +
                       "\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(product_color.price) +
+                      "\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", { staticStyle: { "text-align": "right" } }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-sm btn-outline-secondary",
+                      on: {
+                        click: function($event) {
+                          _vm.EditColor(product_color.id),
+                            (_vm.edit_color_id = product_color.id)
+                        }
+                      }
+                    },
+                    [_vm._v("Изменить")]
                   )
                 ])
               ])
@@ -42837,7 +42991,7 @@ var render = function() {
                         attrs: {
                           name: "new_color_image",
                           "label-idle": "Выбрать картинку...",
-                          "allow-multiple": "false",
+                          "allow-multiple": false,
                           "accepted-file-types": "image/jpeg, image/png",
                           server: "/api/product/add_color_image_upload",
                           files: _vm.color_filepond_files
@@ -42875,6 +43029,7 @@ var render = function() {
                       _c(
                         "button",
                         {
+                          staticClass: "btn btn-primary",
                           on: {
                             click: function($event) {
                               return _vm.saveColor(_vm.product.id)
@@ -42882,6 +43037,120 @@ var render = function() {
                           }
                         },
                         [_vm._v("Добавить цвет")]
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.modal_edit_color
+          ? _c("div", { staticClass: "modal", attrs: { tabindex: "-1" } }, [
+              _c("div", { staticClass: "modal-dialog" }, [
+                _c("div", { staticClass: "modal-content" }, [
+                  _c("div", { staticClass: "modal-header" }, [
+                    _c("h5", { staticClass: "modal-title" }, [
+                      _vm._v("Изменить цвет")
+                    ]),
+                    _vm._v(" "),
+                    _c("button", {
+                      staticClass: "btn-close",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.close_edit_color_modal()
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "modal-body" },
+                    [
+                      _c("file-pond", {
+                        ref: "edit_color_image",
+                        attrs: {
+                          name: "edit_color_image",
+                          "label-idle": "Выбрать картинку...",
+                          "allow-multiple": false,
+                          "accepted-file-types": "image/jpeg, image/png",
+                          server: _vm.server,
+                          files: _vm.color_filepond_files_edit
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row mb-4" }, [
+                        _c("div", { staticClass: "col-8" }, [
+                          _c("label", { staticClass: "form-label" }, [
+                            _vm._v("Цвет")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.edit_color_name,
+                                expression: "edit_color_name"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.edit_color_name },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.edit_color_name = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-4" }, [
+                          _c("label", { staticClass: "form-label" }, [
+                            _vm._v("Цена")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.edit_color_price,
+                                expression: "edit_color_price"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.edit_color_price },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.edit_color_price = $event.target.value
+                              }
+                            }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          on: {
+                            click: function($event) {
+                              return _vm.updateColor(_vm.edit_color_id)
+                            }
+                          }
+                        },
+                        [_vm._v("Сохранить")]
                       )
                     ],
                     1
