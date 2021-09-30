@@ -3,7 +3,7 @@
         <header>
             <nav class="navbar navbar-expand-md navbar-light bg-light mb-4">
                 <div class="container">
-                    <a class="navbar-brand" href="#">Админка</a>
+                    <router-link :to="{name: 'Products'}" class="navbar-brand">Админка</router-link>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>

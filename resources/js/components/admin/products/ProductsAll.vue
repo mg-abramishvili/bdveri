@@ -23,7 +23,7 @@
                         {{ product.name }}
                     </td>
                     <td>
-                        {{ product.base_price }}
+                        {{ product.base_price }} ₽
                     </td>
                     <td style="text-align: right;">
                         <router-link :to="{ name: 'ProductEdit', params: { id: product.id }}" class="btn btn-sm btn-warning">Изменить</router-link>

@@ -1,7 +1,11 @@
 <template>
     <div class="container">
-        <h1>Главная</h1>
-        <p>Страница в разработке.</p>
+        <div class="row">
+            <div v-for="product in products" :key="'product_' + product.id" class="col-12 col-md-4">
+                <div>{{ product.name }}</div>
+                <div>{{ product.base_price }} ₽</div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -9,7 +13,7 @@
 export default {
     data: function () {
         return {
-            
+            products: [],
         };
     },
     created() {
