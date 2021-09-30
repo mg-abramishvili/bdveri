@@ -18,7 +18,7 @@ class ProductController extends Controller
 
     public function product_item($id)
     {
-        return Product::find($id);
+        return Product::with('colors')->find($id);
     }
 
     public function products_store(Request $request)
@@ -70,7 +70,7 @@ class ProductController extends Controller
         $color = new Color([
             'name' => $data['color_name'],
             'price' => $data['color_price'],
-            'image' => $data['color_image']
+            'image' => '/uploads/' . now()->timestamp . '_' . $temp_file->filename
         ]);
 
         $color->save();

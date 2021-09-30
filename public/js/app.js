@@ -2299,6 +2299,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2320,13 +2334,16 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
     };
   },
   created: function created() {
-    var _this = this;
-
-    axios.get("/api/product/".concat(this.$route.params.id)).then(function (response) {
-      return _this.product = response.data, _this.name = response.data.name, _this.base_price = response.data.base_price, _this.old_price = response.data.old_price, _this.description = response.data.description;
-    });
+    this.getProductInfo();
   },
   methods: {
+    getProductInfo: function getProductInfo() {
+      var _this = this;
+
+      axios.get("/api/product/".concat(this.$route.params.id)).then(function (response) {
+        return _this.product = response.data, _this.name = response.data.name, _this.base_price = response.data.base_price, _this.old_price = response.data.old_price, _this.description = response.data.description;
+      });
+    },
     saveProduct: function saveProduct($id) {
       var _this2 = this;
 
@@ -2363,9 +2380,7 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
           color_price: this.new_color_price,
           color_image: this.new_color_image
         }).then(function (response) {
-          return _this3.$router.push({
-            name: 'Products'
-          });
+          return _this3.getProductInfo();
         })["catch"](function (error) {
           if (error.response) {
             for (var key in error.response.data.errors) {
@@ -42726,6 +42741,31 @@ var render = function() {
         "div",
         { staticClass: "col-12 col-md-8" },
         [
+          _c("table", { staticClass: "table table-striped table-hover" }, [
+            _c(
+              "tbody",
+              _vm._l(_vm.product.colors, function(product_color) {
+                return _c("tr", { key: "product_color_" + product_color.id }, [
+                  _c("td", [
+                    _c("img", {
+                      staticStyle: { width: "auto", height: "50px" },
+                      attrs: { src: product_color.image }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(product_color.name) +
+                        "\n                        "
+                    )
+                  ])
+                ])
+              }),
+              0
+            )
+          ]),
+          _vm._v(" "),
           _c("file-pond", {
             ref: "new_color_image",
             attrs: {

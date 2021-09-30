@@ -27,6 +27,20 @@
                 <button @click="saveProduct(product.id)" class="btn btn-primary">Сохранить</button>
             </div>
             <div class="col-12 col-md-8">
+
+                <table class="table table-striped table-hover">
+                    <tbody>
+                        <tr v-for="product_color in product.colors" :key="'product_color_' + product_color.id">
+                            <td>
+                                <img :src="product_color.image" style="width: auto; height:50px;"/>
+                            </td>
+                            <td>
+                                {{ product_color.name }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
                 <file-pond
                     name="new_color_image"
                     ref="new_color_image"
@@ -79,7 +93,11 @@
             }
         },
         created() {
-            axios
+            this.getProductInfo()
+        },
+        methods: {
+            getProductInfo() {
+                axios
                 .get(`/api/product/${this.$route.params.id}`)
                 .then(response => (
                     this.product = response.data,
@@ -88,8 +106,7 @@
                     this.old_price = response.data.old_price,
                     this.description = response.data.description
                 ));
-        },
-        methods: {
+            },
             saveProduct($id) {
                 if(this.name.length > 0 && this.base_price.length > 0) {
                     axios
@@ -115,7 +132,7 @@
                     axios
                     .post(`/api/product/${$id}/add_color`, { color_name: this.new_color_name, color_price: this.new_color_price, color_image: this.new_color_image })
                     .then(response => (
-                        this.$router.push({name: 'Products' })
+                        this.getProductInfo()
                     ))
                     .catch((error) => {
                         if(error.response) {
