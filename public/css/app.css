@@ -11,3 +11,7 @@
 .table tr td {
     vertical-align: middle;
 }
+
+.modal {
+    display: block;
+}

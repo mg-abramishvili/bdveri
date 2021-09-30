@@ -2313,6 +2313,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2327,6 +2349,7 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
       base_price: '',
       old_price: '',
       description: '',
+      modal_add_new_color: false,
       new_color_name: '',
       new_color_price: '',
       new_color_image: '',
@@ -2380,7 +2403,7 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
           color_price: this.new_color_price,
           color_image: this.new_color_image
         }).then(function (response) {
-          return _this3.getProductInfo();
+          return _this3.getProductInfo(), _this3.close_add_color_modal();
         })["catch"](function (error) {
           if (error.response) {
             for (var key in error.response.data.errors) {
@@ -2392,6 +2415,9 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
       } else {
         alert('Заполните поля');
       }
+    },
+    close_add_color_modal: function close_add_color_modal() {
+      this.modal_add_new_color = false, this.new_color_name = '', this.new_color_price = '', this.new_color_image = '';
     }
   },
   components: {
@@ -42737,91 +42763,147 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-12 col-md-8" },
-        [
-          _c("table", { staticClass: "table table-striped table-hover" }, [
+      _c("div", { staticClass: "col-12 col-md-8" }, [
+        _c("div", { staticClass: "row align-items-center mb-2" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-6 text-end" }, [
             _c(
-              "tbody",
-              _vm._l(_vm.product.colors, function(product_color) {
-                return _c("tr", { key: "product_color_" + product_color.id }, [
-                  _c("td", [
-                    _c("img", {
-                      staticStyle: { width: "auto", height: "50px" },
-                      attrs: { src: product_color.image }
+              "button",
+              {
+                staticClass: "btn btn-sm btn-outline-primary",
+                on: {
+                  click: function($event) {
+                    _vm.modal_add_new_color = true
+                  }
+                }
+              },
+              [_vm._v("Добавить цвет")]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("table", { staticClass: "table table-striped table-hover" }, [
+          _c(
+            "tbody",
+            _vm._l(_vm.product.colors, function(product_color) {
+              return _c("tr", { key: "product_color_" + product_color.id }, [
+                _c("td", { staticStyle: { width: "100px" } }, [
+                  _c("img", {
+                    staticStyle: { width: "auto", height: "50px" },
+                    attrs: { src: product_color.image }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(product_color.name) +
+                      "\n                        "
+                  )
+                ])
+              ])
+            }),
+            0
+          )
+        ]),
+        _vm._v(" "),
+        _vm.modal_add_new_color
+          ? _c("div", { staticClass: "modal", attrs: { tabindex: "-1" } }, [
+              _c("div", { staticClass: "modal-dialog" }, [
+                _c("div", { staticClass: "modal-content" }, [
+                  _c("div", { staticClass: "modal-header" }, [
+                    _c("h5", { staticClass: "modal-title" }, [
+                      _vm._v("Новый цвет")
+                    ]),
+                    _vm._v(" "),
+                    _c("button", {
+                      staticClass: "btn-close",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.close_add_color_modal()
+                        }
+                      }
                     })
                   ]),
                   _vm._v(" "),
-                  _c("td", [
-                    _vm._v(
-                      "\n                            " +
-                        _vm._s(product_color.name) +
-                        "\n                        "
-                    )
-                  ])
+                  _c(
+                    "div",
+                    { staticClass: "modal-body" },
+                    [
+                      _c("file-pond", {
+                        ref: "new_color_image",
+                        attrs: {
+                          name: "new_color_image",
+                          "label-idle": "Выбрать картинку...",
+                          "allow-multiple": "false",
+                          "accepted-file-types": "image/jpeg, image/png",
+                          server: "/api/product/add_color_image_upload",
+                          files: _vm.color_filepond_files
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mb-3" }, [
+                        _c("label", { staticClass: "form-label" }, [
+                          _vm._v("Цвет")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.new_color_name,
+                              expression: "new_color_name"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text" },
+                          domProps: { value: _vm.new_color_name },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.new_color_name = $event.target.value
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.saveColor(_vm.product.id)
+                            }
+                          }
+                        },
+                        [_vm._v("Добавить цвет")]
+                      )
+                    ],
+                    1
+                  )
                 ])
-              }),
-              0
-            )
-          ]),
-          _vm._v(" "),
-          _c("file-pond", {
-            ref: "new_color_image",
-            attrs: {
-              name: "new_color_image",
-              "label-idle": "Выбрать картинку...",
-              "allow-multiple": "false",
-              "accepted-file-types": "image/jpeg, image/png",
-              server: "/api/product/add_color_image_upload",
-              files: _vm.color_filepond_files
-            }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "mb-3" }, [
-            _c("label", { staticClass: "form-label" }, [_vm._v("Цвет")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.new_color_name,
-                  expression: "new_color_name"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text" },
-              domProps: { value: _vm.new_color_name },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.new_color_name = $event.target.value
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              on: {
-                click: function($event) {
-                  return _vm.saveColor(_vm.product.id)
-                }
-              }
-            },
-            [_vm._v("Добавить цвет")]
-          )
-        ],
-        1
-      )
+              ])
+            ])
+          : _vm._e()
+      ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6" }, [
+      _c("label", { staticClass: "form-label mb-0" }, [_vm._v("Цвета")])
+    ])
+  }
+]
 render._withStripped = true
 
 

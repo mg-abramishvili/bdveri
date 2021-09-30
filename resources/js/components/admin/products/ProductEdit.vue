@@ -27,11 +27,20 @@
                 <button @click="saveProduct(product.id)" class="btn btn-primary">Сохранить</button>
             </div>
             <div class="col-12 col-md-8">
+                
+                <div class="row align-items-center mb-2">
+                    <div class="col-6">
+                        <label class="form-label mb-0">Цвета</label>
+                    </div>
+                    <div class="col-6 text-end">
+                        <button @click="modal_add_new_color = true" class="btn btn-sm btn-outline-primary">Добавить цвет</button>
+                    </div>
+                </div>
 
                 <table class="table table-striped table-hover">
                     <tbody>
                         <tr v-for="product_color in product.colors" :key="'product_color_' + product_color.id">
-                            <td>
+                            <td style="width: 100px;">
                                 <img :src="product_color.image" style="width: auto; height:50px;"/>
                             </td>
                             <td>
@@ -41,20 +50,33 @@
                     </tbody>
                 </table>
 
-                <file-pond
-                    name="new_color_image"
-                    ref="new_color_image"
-                    label-idle="Выбрать картинку..."
-                    allow-multiple="false"
-                    accepted-file-types="image/jpeg, image/png"
-                    server="/api/product/add_color_image_upload"
-                    v-bind:files="color_filepond_files"
-                />
-                <div class="mb-3">
-                    <label class="form-label">Цвет</label>
-                    <input v-model="new_color_name" type="text" class="form-control">
+                <div v-if="modal_add_new_color" class="modal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Новый цвет</h5>
+                                <button @click="close_add_color_modal()" type="button" class="btn-close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <file-pond
+                                    name="new_color_image"
+                                    ref="new_color_image"
+                                    label-idle="Выбрать картинку..."
+                                    allow-multiple="false"
+                                    accepted-file-types="image/jpeg, image/png"
+                                    server="/api/product/add_color_image_upload"
+                                    v-bind:files="color_filepond_files"
+                                />
+                                <div class="mb-3">
+                                    <label class="form-label">Цвет</label>
+                                    <input v-model="new_color_name" type="text" class="form-control">
+                                </div>
+                                <button @click="saveColor(product.id)">Добавить цвет</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <button @click="saveColor(product.id)">Добавить цвет</button>
+
             </div>
         </div>
 
@@ -85,6 +107,7 @@
                 old_price: '',
                 description: '',
 
+                modal_add_new_color: false,
                 new_color_name: '',
                 new_color_price: '',
                 new_color_image: '',
@@ -132,7 +155,8 @@
                     axios
                     .post(`/api/product/${$id}/add_color`, { color_name: this.new_color_name, color_price: this.new_color_price, color_image: this.new_color_image })
                     .then(response => (
-                        this.getProductInfo()
+                        this.getProductInfo(),
+                        this.close_add_color_modal()
                     ))
                     .catch((error) => {
                         if(error.response) {
@@ -146,6 +170,12 @@
                     alert('Заполните поля')
                 }
             },
+            close_add_color_modal() {
+                this.modal_add_new_color = false,
+                this.new_color_name = '',
+                this.new_color_price = '',
+                this.new_color_image = ''
+            }
         },
         components: {
             FilePond,
