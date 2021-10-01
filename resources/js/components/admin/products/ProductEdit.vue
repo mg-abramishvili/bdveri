@@ -132,7 +132,7 @@
                 </div>
             </div>
         </div>
-
+        <div v-if="modal_bg" class="modal-backdrop fade show"></div>
     </div>
 </template>
 
@@ -159,6 +159,8 @@
                 base_price: '',
                 old_price: '',
                 description: '',
+
+                modal_bg: false,
 
                 modal_add_new_color: false,
                 new_color_name: '',
@@ -275,6 +277,7 @@
             },
             EditColor(id) {
                 this.modal_edit_color = true
+                this.modal_bg = true
                 axios
                 .get(`/api/color/${id}`)
                 .then(response => (
@@ -323,6 +326,7 @@
             },
             close_add_color_modal() {
                 this.modal_add_new_color = false,
+                this.modal_bg = false,
                 this.new_color_name = '',
                 this.new_color_price = '',
                 this.new_color_image = '',
@@ -330,6 +334,7 @@
             },
             close_edit_color_modal() {
                 this.modal_edit_color = false,
+                this.modal_bg = false,
                 this.edit_color_name = '',
                 this.edit_color_price = '',
                 this.edit_color_image = '',

@@ -2402,6 +2402,7 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
       base_price: '',
       old_price: '',
       description: '',
+      modal_bg: false,
       modal_add_new_color: false,
       new_color_name: '',
       new_color_price: '',
@@ -2524,6 +2525,7 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
       var _this4 = this;
 
       this.modal_edit_color = true;
+      this.modal_bg = true;
       axios.get("/api/color/".concat(id)).then(function (response) {
         return _this4.edit_color_name = response.data.name, _this4.edit_color_price = response.data.price, _this4.color_filepond_files_edit = [{
           source: response.data.image,
@@ -2567,10 +2569,10 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
       }
     },
     close_add_color_modal: function close_add_color_modal() {
-      this.modal_add_new_color = false, this.new_color_name = '', this.new_color_price = '', this.new_color_image = '', this.color_filepond_files = [];
+      this.modal_add_new_color = false, this.modal_bg = false, this.new_color_name = '', this.new_color_price = '', this.new_color_image = '', this.color_filepond_files = [];
     },
     close_edit_color_modal: function close_edit_color_modal() {
-      this.modal_edit_color = false, this.edit_color_name = '', this.edit_color_price = '', this.edit_color_image = '', this.color_filepond_files_edit = [];
+      this.modal_edit_color = false, this.modal_bg = false, this.edit_color_name = '', this.edit_color_price = '', this.edit_color_image = '', this.color_filepond_files_edit = [];
     }
   },
   components: {
@@ -44922,7 +44924,11 @@ var render = function() {
           ])
         ])
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _vm.modal_bg
+      ? _c("div", { staticClass: "modal-backdrop fade show" })
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
