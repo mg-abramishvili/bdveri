@@ -98,6 +98,28 @@ html, body {
     border: none;
     margin: 0;
 }
+.product-colors-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.product-colors-list li {
+    display: inline-block;
+    margin-right: 5px;
+}
+.product-color-button {
+    cursor: pointer;
+    padding: 8px 12px;
+    line-height: 1;
+    background: none;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    margin: 0;
+    font-size: 15px;
+}
+.product-color-button_active {
+    border-color: #bea67c;
+}
 .product-item-page .price {
     color: #bea67c;
     font-size: 40px;

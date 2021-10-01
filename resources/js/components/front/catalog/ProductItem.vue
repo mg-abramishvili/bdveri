@@ -94,16 +94,16 @@
                     </div>
                 </div>
 
-                <ul>
+                <ul class="product-colors-list mt-4">
                     <li v-for="(color, index) in product.colors" :key="'product_color_' + color.id">
-                        <button @click="chooseColor(index, color.id, color.name, color.price)">
+                        <button @click="chooseColor(index, color.id, color.name, color.price)" :id="'product_color_' + color.id" class="product-color-button">
                             {{ color.name }}
                         </button>
                     </li>
                 </ul>
 
                 <div class="price my-4">
-                    <del style="font-weight: normal;">{{ product.old_price }} ₽</del>
+                    <del v-if="product.old_price" style="font-weight: normal;">{{ product.old_price }} ₽</del>
                     {{ price }} ₽
                 </div>
 
@@ -154,8 +154,14 @@ export default {
             } else {
                 this.price = this.product.base_price
             }
+            
             this.$refs.ProductColorHooper.slideTo(index);
-            console.log(index)
+            
+            var color_btns = document.querySelectorAll(".product-color-button");
+            for (var i = 0; i < color_btns.length; i++) {
+                color_btns[i].classList.remove('product-color-button_active')
+            }
+            document.getElementById('product_color_' + id).classList.add('product-color-button_active')
         },
         slidePrev() {
             this.$refs.ProductColorHooper.slidePrev();

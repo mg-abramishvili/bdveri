@@ -2905,7 +2905,13 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       this.$refs.ProductColorHooper.slideTo(index);
-      console.log(index);
+      var color_btns = document.querySelectorAll(".product-color-button");
+
+      for (var i = 0; i < color_btns.length; i++) {
+        color_btns[i].classList.remove('product-color-button_active');
+      }
+
+      document.getElementById('product_color_' + id).classList.add('product-color-button_active');
     },
     slidePrev: function slidePrev() {
       this.$refs.ProductColorHooper.slidePrev();
@@ -45471,11 +45477,14 @@ var render = function() {
         _vm._v(" "),
         _c(
           "ul",
+          { staticClass: "product-colors-list mt-4" },
           _vm._l(_vm.product.colors, function(color, index) {
             return _c("li", { key: "product_color_" + color.id }, [
               _c(
                 "button",
                 {
+                  staticClass: "product-color-button",
+                  attrs: { id: "product_color_" + color.id },
                   on: {
                     click: function($event) {
                       return _vm.chooseColor(
@@ -45501,9 +45510,11 @@ var render = function() {
         ),
         _vm._v(" "),
         _c("div", { staticClass: "price my-4" }, [
-          _c("del", { staticStyle: { "font-weight": "normal" } }, [
-            _vm._v(_vm._s(_vm.product.old_price) + " ₽")
-          ]),
+          _vm.product.old_price
+            ? _c("del", { staticStyle: { "font-weight": "normal" } }, [
+                _vm._v(_vm._s(_vm.product.old_price) + " ₽")
+              ])
+            : _vm._e(),
           _vm._v("\n                " + _vm._s(_vm.price) + " ₽\n            ")
         ]),
         _vm._v(" "),
