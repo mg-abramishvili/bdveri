@@ -1,5 +1,7 @@
 import Home from './components/front/home/Home.vue';
 import Catalog from './components/front/catalog/Catalog.vue';
+import ProductItem from './components/front/catalog/ProductItem.vue';
+
 import Products from './components/admin/products/ProductsAll.vue';
 import ProductCreate from './components/admin/products/ProductCreate.vue';
 import ProductEdit from './components/admin/products/ProductEdit.vue';
@@ -15,6 +17,11 @@ export const routes = [
         path: '/catalog',
         name: 'Catalog',
         component: Catalog
+    },
+    {
+        path: '/product/:id',
+        name: 'ProductItem',
+        component: ProductItem
     },
     {
         path: '/admin/products',

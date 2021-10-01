@@ -1,4 +1,10 @@
 @import 'bootstrap.min.css';
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap');
+
+html, body {
+    font-family: 'Jost', sans-serif;
+    font-size: 16px;
+}
 
 .filepond--root .filepond--credits {
     display: none;
@@ -11,3 +17,38 @@
 .modal {
     display: block;
 }
+
+
+/* Product Item */
+.ProductColorHooper_wrapper {
+    position: relative;
+}
+.ProductColorHooper_wrapper .hooper_nav_button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    width: 25px;
+    height: 25px;
+    z-index: 10;
+    border: 0;
+    box-shadow: none;
+}
+.ProductColorHooper_wrapper .hooper_nav_button_prev {
+    background-image: url('/img/hooper_prev.svg');
+    left: 0;
+}
+.ProductColorHooper_wrapper .hooper_nav_button_next {
+    background-image: url('/img/hooper_next.svg');
+    right: 0;
+}
+.product-colors-slide {
+    height: 500px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+/* Product Item */
