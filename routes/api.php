@@ -14,6 +14,11 @@ Route::get('color/{id}','App\Http\Controllers\ProductController@color_item');
 Route::post('color/{id}/update','App\Http\Controllers\ProductController@update_color');
 Route::get('color/{id}/delete','App\Http\Controllers\ProductController@delete_color');
 
+Route::post('product/{id}/add_size','App\Http\Controllers\ProductController@add_size');
+Route::get('size/{id}','App\Http\Controllers\ProductController@size_item');
+Route::post('size/{id}/update','App\Http\Controllers\ProductController@update_size');
+Route::get('size/{id}/delete','App\Http\Controllers\ProductController@delete_size');
+
 Route::post('upload','App\Http\Controllers\UploadController@store');
 Route::delete('upload','App\Http\Controllers\UploadController@delete');
 

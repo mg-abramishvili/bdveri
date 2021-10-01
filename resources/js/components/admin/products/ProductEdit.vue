@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="col-12 col-md-8">
-                <div class="card shadow-sm">
+                <div class="card shadow-sm mb-4">
                     <div class="card-body">
 
                         <table class="table table-hover mb-0">
@@ -130,6 +130,84 @@
 
                     </div>
                 </div>
+
+                <div class="card shadow-sm">
+                    <div class="card-body">
+
+                        <table class="table table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Размер</th>
+                                    <th style="text-align: right;">Цена</th>
+                                    <th style="text-align: right;">
+                                        <button @click="modal_add_new_size = true" class="btn btn-sm btn-primary">Добавить размер</button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="product_size in product.sizes" :key="'product_size_' + product_size.id">
+                                    <td>
+                                        {{ product_size.name }}
+                                    </td>
+                                    <td style="text-align: right;">
+                                        <template v-if="product_size.price">
+                                            {{ product_size.price }} ₽
+                                        </template>
+                                    </td>
+                                    <td style="text-align: right;">
+                                        <button @click="EditSize(product_size.id), edit_size_id = product_size.id" class="btn btn-sm btn-outline-secondary">Изменить</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div v-if="modal_add_new_size" class="modal" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Новый размер</h5>
+                                        <button @click="close_add_size_modal()" type="button" class="btn-close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label class="form-label">Размер</label>
+                                            <input v-model="new_size_name" type="text" class="form-control">
+                                        </div>
+                                        <button @click="saveSize(product.id)" class="btn btn-primary">Добавить размер</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div v-if="modal_edit_size" class="modal" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Изменить размер</h5>
+                                        <button @click="close_edit_size_modal()" type="button" class="btn-close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row mb-4">
+                                            <div class="col-8">
+                                                <label class="form-label">Размер</label>
+                                                <input v-model="edit_size_name" type="text" class="form-control">
+                                            </div>
+                                            <div class="col-4">
+                                                <label class="form-label">Цена</label>
+                                                <input v-model="edit_size_price" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <button @click="updateSize(edit_size_id)" class="btn btn-primary">Сохранить</button>
+                                            <button @click="deleteSize(edit_size_id)" class="btn btn-outline-danger">Удалить</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
         <div v-if="modal_bg" class="modal-backdrop fade show"></div>
@@ -181,6 +259,15 @@
                         }
                     }
                 ],
+
+                modal_add_new_size: false,
+                new_size_name: '',
+                new_size_price: '',
+                
+                modal_edit_size: false,
+                edit_size_id: '',
+                edit_size_name: '',
+                edit_size_price: '',
 
                 server: {
                     remove(filename, load) {
@@ -339,6 +426,78 @@
                 this.edit_color_price = '',
                 this.edit_color_image = '',
                 this.color_filepond_files_edit = []
+            },
+            saveSize($id) {
+                if(this.new_size_name.length) {
+                    axios
+                    .post(`/api/product/${$id}/add_size`, { size_name: this.new_size_name, size_price: this.new_size_price })
+                    .then(response => (
+                        this.getProductInfo(),
+                        this.close_add_size_modal()
+                    ))
+                    .catch((error) => {
+                        if(error.response) {
+                            for(var key in error.response.data.errors){
+                                console.log(key)
+                                alert(key)
+                            }
+                        }
+                    });
+                } else {
+                    alert('Заполните поля')
+                }
+            },
+            EditSize(id) {
+                this.modal_edit_size = true
+                this.modal_bg = true
+                axios
+                .get(`/api/size/${id}`)
+                .then(response => (
+                    this.edit_size_name = response.data.name,
+                    this.edit_size_price = response.data.price
+                ));
+            },
+            updateSize(id) {
+                if(this.edit_size_name.length) {
+                    axios
+                    .post(`/api/size/${id}/update`, { size_name: this.edit_size_name, size_price: this.edit_size_price })
+                    .then(response => (
+                        this.getProductInfo(),
+                        this.close_edit_size_modal()
+                    ))
+                    .catch((error) => {
+                        if(error.response) {
+                            for(var key in error.response.data.errors){
+                                console.log(key)
+                                alert(key)
+                            }
+                        }
+                    });
+                } else {
+                    alert('Заполните поля')
+                }
+            },
+            deleteSize(id) {
+                if (confirm("Точно удалить?")) {
+                    axios
+                        .get(`/api/size/${id}/delete`)
+                        .then(response => (
+                            this.getProductInfo(),
+                            this.close_edit_size_modal()
+                        ))
+                }
+            },
+            close_add_size_modal() {
+                this.modal_add_new_size = false,
+                this.modal_bg = false,
+                this.new_size_name = '',
+                this.new_size_price = ''
+            },
+            close_edit_size_modal() {
+                this.modal_edit_size = false,
+                this.modal_bg = false,
+                this.edit_size_name = '',
+                this.edit_size_price = ''
             },
         },
         components: {

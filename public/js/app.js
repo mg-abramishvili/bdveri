@@ -2388,6 +2388,84 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2419,6 +2497,13 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
           type: 'local'
         }
       }],
+      modal_add_new_size: false,
+      new_size_name: '',
+      new_size_price: '',
+      modal_edit_size: false,
+      edit_size_id: '',
+      edit_size_name: '',
+      edit_size_price: '',
       server: {
         remove: function remove(filename, load) {
           load('1');
@@ -2573,6 +2658,72 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
     },
     close_edit_color_modal: function close_edit_color_modal() {
       this.modal_edit_color = false, this.modal_bg = false, this.edit_color_name = '', this.edit_color_price = '', this.edit_color_image = '', this.color_filepond_files_edit = [];
+    },
+    saveSize: function saveSize($id) {
+      var _this7 = this;
+
+      if (this.new_size_name.length) {
+        axios.post("/api/product/".concat($id, "/add_size"), {
+          size_name: this.new_size_name,
+          size_price: this.new_size_price
+        }).then(function (response) {
+          return _this7.getProductInfo(), _this7.close_add_size_modal();
+        })["catch"](function (error) {
+          if (error.response) {
+            for (var key in error.response.data.errors) {
+              console.log(key);
+              alert(key);
+            }
+          }
+        });
+      } else {
+        alert('Заполните поля');
+      }
+    },
+    EditSize: function EditSize(id) {
+      var _this8 = this;
+
+      this.modal_edit_size = true;
+      this.modal_bg = true;
+      axios.get("/api/size/".concat(id)).then(function (response) {
+        return _this8.edit_size_name = response.data.name, _this8.edit_size_price = response.data.price;
+      });
+    },
+    updateSize: function updateSize(id) {
+      var _this9 = this;
+
+      if (this.edit_size_name.length) {
+        axios.post("/api/size/".concat(id, "/update"), {
+          size_name: this.edit_size_name,
+          size_price: this.edit_size_price
+        }).then(function (response) {
+          return _this9.getProductInfo(), _this9.close_edit_size_modal();
+        })["catch"](function (error) {
+          if (error.response) {
+            for (var key in error.response.data.errors) {
+              console.log(key);
+              alert(key);
+            }
+          }
+        });
+      } else {
+        alert('Заполните поля');
+      }
+    },
+    deleteSize: function deleteSize(id) {
+      var _this10 = this;
+
+      if (confirm("Точно удалить?")) {
+        axios.get("/api/size/".concat(id, "/delete")).then(function (response) {
+          return _this10.getProductInfo(), _this10.close_edit_size_modal();
+        });
+      }
+    },
+    close_add_size_modal: function close_add_size_modal() {
+      this.modal_add_new_size = false, this.modal_bg = false, this.new_size_name = '', this.new_size_price = '';
+    },
+    close_edit_size_modal: function close_edit_size_modal() {
+      this.modal_edit_size = false, this.modal_bg = false, this.edit_size_name = '', this.edit_size_price = '';
     }
   },
   components: {
@@ -44605,7 +44756,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-12 col-md-8" }, [
-        _c("div", { staticClass: "card shadow-sm" }, [
+        _c("div", { staticClass: "card shadow-sm mb-4" }, [
           _c("div", { staticClass: "card-body" }, [
             _c("table", { staticClass: "table table-hover mb-0" }, [
               _c("thead", [
@@ -44917,6 +45068,269 @@ var render = function() {
                         ],
                         1
                       )
+                    ])
+                  ])
+                ])
+              : _vm._e()
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card shadow-sm" }, [
+          _c("div", { staticClass: "card-body" }, [
+            _c("table", { staticClass: "table table-hover mb-0" }, [
+              _c("thead", [
+                _c("tr", [
+                  _c("th", [_vm._v("Размер")]),
+                  _vm._v(" "),
+                  _c("th", { staticStyle: { "text-align": "right" } }, [
+                    _vm._v("Цена")
+                  ]),
+                  _vm._v(" "),
+                  _c("th", { staticStyle: { "text-align": "right" } }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-sm btn-primary",
+                        on: {
+                          click: function($event) {
+                            _vm.modal_add_new_size = true
+                          }
+                        }
+                      },
+                      [_vm._v("Добавить размер")]
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.product.sizes, function(product_size) {
+                  return _c("tr", { key: "product_size_" + product_size.id }, [
+                    _c("td", [
+                      _vm._v(
+                        "\n                                    " +
+                          _vm._s(product_size.name) +
+                          "\n                                "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      { staticStyle: { "text-align": "right" } },
+                      [
+                        product_size.price
+                          ? [
+                              _vm._v(
+                                "\n                                        " +
+                                  _vm._s(product_size.price) +
+                                  " ₽\n                                    "
+                              )
+                            ]
+                          : _vm._e()
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _c("td", { staticStyle: { "text-align": "right" } }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-sm btn-outline-secondary",
+                          on: {
+                            click: function($event) {
+                              _vm.EditSize(product_size.id),
+                                (_vm.edit_size_id = product_size.id)
+                            }
+                          }
+                        },
+                        [_vm._v("Изменить")]
+                      )
+                    ])
+                  ])
+                }),
+                0
+              )
+            ]),
+            _vm._v(" "),
+            _vm.modal_add_new_size
+              ? _c("div", { staticClass: "modal", attrs: { tabindex: "-1" } }, [
+                  _c("div", { staticClass: "modal-dialog" }, [
+                    _c("div", { staticClass: "modal-content" }, [
+                      _c("div", { staticClass: "modal-header" }, [
+                        _c("h5", { staticClass: "modal-title" }, [
+                          _vm._v("Новый размер")
+                        ]),
+                        _vm._v(" "),
+                        _c("button", {
+                          staticClass: "btn-close",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.close_add_size_modal()
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "modal-body" }, [
+                        _c("div", { staticClass: "mb-3" }, [
+                          _c("label", { staticClass: "form-label" }, [
+                            _vm._v("Размер")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.new_size_name,
+                                expression: "new_size_name"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.new_size_name },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.new_size_name = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary",
+                            on: {
+                              click: function($event) {
+                                return _vm.saveSize(_vm.product.id)
+                              }
+                            }
+                          },
+                          [_vm._v("Добавить размер")]
+                        )
+                      ])
+                    ])
+                  ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.modal_edit_size
+              ? _c("div", { staticClass: "modal", attrs: { tabindex: "-1" } }, [
+                  _c("div", { staticClass: "modal-dialog" }, [
+                    _c("div", { staticClass: "modal-content" }, [
+                      _c("div", { staticClass: "modal-header" }, [
+                        _c("h5", { staticClass: "modal-title" }, [
+                          _vm._v("Изменить размер")
+                        ]),
+                        _vm._v(" "),
+                        _c("button", {
+                          staticClass: "btn-close",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.close_edit_size_modal()
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "modal-body" }, [
+                        _c("div", { staticClass: "row mb-4" }, [
+                          _c("div", { staticClass: "col-8" }, [
+                            _c("label", { staticClass: "form-label" }, [
+                              _vm._v("Размер")
+                            ]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.edit_size_name,
+                                  expression: "edit_size_name"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { type: "text" },
+                              domProps: { value: _vm.edit_size_name },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.edit_size_name = $event.target.value
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-4" }, [
+                            _c("label", { staticClass: "form-label" }, [
+                              _vm._v("Цена")
+                            ]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.edit_size_price,
+                                  expression: "edit_size_price"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { type: "text" },
+                              domProps: { value: _vm.edit_size_price },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.edit_size_price = $event.target.value
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "d-flex justify-content-between" },
+                          [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.updateSize(_vm.edit_size_id)
+                                  }
+                                }
+                              },
+                              [_vm._v("Сохранить")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-outline-danger",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.deleteSize(_vm.edit_size_id)
+                                  }
+                                }
+                              },
+                              [_vm._v("Удалить")]
+                            )
+                          ]
+                        )
+                      ])
                     ])
                   ])
                 ])

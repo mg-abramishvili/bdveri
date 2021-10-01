@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Color;
+use App\Models\Size;
 use App\Models\TemporaryFile;
 use Illuminate\Http\Request;
 use Illuminate\Http\File;
@@ -18,7 +19,7 @@ class ProductController extends Controller
 
     public function product_item($id)
     {
-        return Product::with('colors')->find($id);
+        return Product::with('colors', 'sizes')->find($id);
     }
 
     public function products_store(Request $request)
@@ -134,6 +135,41 @@ class ProductController extends Controller
         }
 
         return '';
+    }
+
+    public function size_item($id)
+    {
+        return Size::find($id);
+    }
+
+    public function add_size($id, Request $request) {
+        $data = request()->all();
+        $product = Product::find($id);
+        
+        $size = new Size([
+            'name' => $data['size_name'],
+            'price' => $data['size_price'],
+        ]);
+
+        $size->save();
+        $product->sizes()->attach($size->id, ['product_id' => $product->id]);
+    }
+
+    public function update_size($id, Request $request) {
+        $data = request()->all();
+        $size = Size::find($id);
+
+        $size->name = $data['size_name'];
+        $size->price = $data['size_price'];
+
+        $size->save();
+    }
+
+    public function delete_size($id, Request $request) {
+        $data = request()->all();
+        $size = Size::find($id);
+        $size->products()->detach();
+        $size->delete();
     }
 
 }
