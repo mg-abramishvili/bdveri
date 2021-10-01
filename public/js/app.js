@@ -2636,6 +2636,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -45014,62 +45016,74 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card shadow-sm mb-4" }, [
-      _c("div", { staticClass: "card-body" }, [
-        _vm.filteredProducts && _vm.filteredProducts.length > 0
-          ? _c(
-              "table",
-              { staticClass: "table table-striped table-hover mb-0" },
-              [
-                _vm._m(1),
-                _vm._v(" "),
-                _c(
-                  "tbody",
-                  _vm._l(_vm.filteredProducts, function(product) {
-                    return _c("tr", { key: "product_" + product.id }, [
-                      _c("td", [
-                        _vm._v(
-                          "\n                            " +
-                            _vm._s(product.name) +
-                            "\n                        "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          "\n                            " +
-                            _vm._s(product.base_price) +
-                            " ₽\n                        "
-                        )
-                      ]),
+      _c(
+        "div",
+        { staticClass: "card-body" },
+        [
+          _vm.products && _vm.products.length > 0
+            ? [
+                _vm.filteredProducts && _vm.filteredProducts.length > 0
+                  ? _c("table", { staticClass: "table table-hover mb-0" }, [
+                      _vm._m(1),
                       _vm._v(" "),
                       _c(
-                        "td",
-                        { staticStyle: { "text-align": "right" } },
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "btn btn-sm btn-outline-primary",
-                              attrs: {
-                                to: {
-                                  name: "ProductEdit",
-                                  params: { id: product.id }
-                                }
-                              }
-                            },
-                            [_vm._v("Изменить")]
-                          )
-                        ],
-                        1
+                        "tbody",
+                        _vm._l(_vm.filteredProducts, function(product) {
+                          return _c("tr", { key: "product_" + product.id }, [
+                            _c("td", [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(product.name) +
+                                  "\n                            "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              { staticStyle: { "text-align": "right" } },
+                              [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(product.base_price) +
+                                    " ₽\n                            "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              { staticStyle: { "text-align": "right" } },
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass:
+                                      "btn btn-sm btn-outline-primary",
+                                    attrs: {
+                                      to: {
+                                        name: "ProductEdit",
+                                        params: { id: product.id }
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Изменить")]
+                                )
+                              ],
+                              1
+                            )
+                          ])
+                        }),
+                        0
                       )
                     ])
-                  }),
-                  0
-                )
+                  : _c("p", { staticClass: "mb-0" }, [
+                      _vm._v("Ничего не найдено 😔")
+                    ])
               ]
-            )
-          : _c("p", { staticClass: "mb-0" }, [_vm._v("Ничего не найдено 😔")])
-      ])
+            : _vm._e()
+        ],
+        2
+      )
     ])
   ])
 }
@@ -45090,7 +45104,7 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("Товар")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Базовая цена")]),
+        _c("th", { staticStyle: { "text-align": "right" } }, [_vm._v("Цена")]),
         _vm._v(" "),
         _c("td")
       ])

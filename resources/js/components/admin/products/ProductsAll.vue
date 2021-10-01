@@ -15,29 +15,31 @@
 
         <div class="card shadow-sm mb-4">
             <div class="card-body">
-                <table v-if="filteredProducts && filteredProducts.length > 0" class="table table-striped table-hover mb-0">
-                    <thead>
-                        <tr>
-                            <th>Товар</th>
-                            <th>Базовая цена</th>
-                            <td></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="product in filteredProducts" :key="'product_' + product.id">
-                            <td>
-                                {{ product.name }}
-                            </td>
-                            <td>
-                                {{ product.base_price }} ₽
-                            </td>
-                            <td style="text-align: right;">
-                                <router-link :to="{ name: 'ProductEdit', params: { id: product.id }}" class="btn btn-sm btn-outline-primary">Изменить</router-link>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <p v-else class="mb-0">Ничего не найдено &#128532;</p>
+                <template v-if="products && products.length > 0">
+                    <table v-if="filteredProducts && filteredProducts.length > 0" class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Товар</th>
+                                <th style="text-align: right;">Цена</th>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="product in filteredProducts" :key="'product_' + product.id">
+                                <td>
+                                    {{ product.name }}
+                                </td>
+                                <td style="text-align: right;">
+                                    {{ product.base_price }} ₽
+                                </td>
+                                <td style="text-align: right;">
+                                    <router-link :to="{ name: 'ProductEdit', params: { id: product.id }}" class="btn btn-sm btn-outline-primary">Изменить</router-link>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p v-else class="mb-0">Ничего не найдено &#128532;</p>
+                </template>
             </div>
         </div>
     </div>
