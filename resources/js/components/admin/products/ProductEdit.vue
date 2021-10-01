@@ -112,7 +112,10 @@
                                         <input v-model="edit_color_price" type="text" class="form-control">
                                     </div>
                                 </div>
-                                <button @click="updateColor(edit_color_id)" class="btn btn-primary">Сохранить</button>
+                                <div class="d-flex justify-content-between">
+                                    <button @click="updateColor(edit_color_id)" class="btn btn-primary">Сохранить</button>
+                                    <button @click="deleteColor(edit_color_id)" class="btn btn-outline-danger">Удалить</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -297,6 +300,16 @@
                     });
                 } else {
                     alert('Заполните поля')
+                }
+            },
+            deleteColor(id) {
+                if (confirm("Точно удалить?")) {
+                    axios
+                        .get(`/api/color/${id}/delete`)
+                        .then(response => (
+                            this.getProductInfo(),
+                            this.close_edit_color_modal()
+                        ))
                 }
             },
             close_add_color_modal() {

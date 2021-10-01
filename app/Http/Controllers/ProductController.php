@@ -103,6 +103,13 @@ class ProductController extends Controller
         $color->save();
     }
 
+    public function delete_color($id, Request $request) {
+        $data = request()->all();
+        $color = Color::find($id);
+        $color->products()->detach();
+        $color->delete();
+    }
+
     public function add_color_image_store(Request $request) {
         if($request->hasFile('new_color_image') || $request->hasFile('edit_color_image')) {
             

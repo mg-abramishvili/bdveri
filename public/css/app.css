@@ -69,8 +69,11 @@ html, body {
     background-image: url('/img/hooper_next.svg');
     right: 0;
 }
+.ProductColorHooper {
+    height: 450px !important;
+}
 .product-colors-slide {
-    height: 500px;
+    height: 100%;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: 50% 50%;

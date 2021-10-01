@@ -2376,6 +2376,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -2543,6 +2546,15 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
         });
       } else {
         alert('Заполните поля');
+      }
+    },
+    deleteColor: function deleteColor(id) {
+      var _this6 = this;
+
+      if (confirm("Точно удалить?")) {
+        axios.get("/api/color/".concat(id, "/delete")).then(function (response) {
+          return _this6.getProductInfo(), _this6.close_edit_color_modal();
+        });
       }
     },
     close_add_color_modal: function close_add_color_modal() {
@@ -2880,7 +2892,9 @@ __webpack_require__.r(__webpack_exports__);
       product: {},
       price: '',
       ProductColorHooper: {
-        itemsToShow: 1
+        itemsToShow: 1,
+        transition: 250,
+        wheelControl: false
       },
       modal_bg: false,
       modal_gdekupit: false,
@@ -44787,16 +44801,35 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-primary",
-                          on: {
-                            click: function($event) {
-                              return _vm.updateColor(_vm.edit_color_id)
-                            }
-                          }
-                        },
-                        [_vm._v("Сохранить")]
+                        "div",
+                        { staticClass: "d-flex justify-content-between" },
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary",
+                              on: {
+                                click: function($event) {
+                                  return _vm.updateColor(_vm.edit_color_id)
+                                }
+                              }
+                            },
+                            [_vm._v("Сохранить")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-outline-danger",
+                              on: {
+                                click: function($event) {
+                                  return _vm.deleteColor(_vm.edit_color_id)
+                                }
+                              }
+                            },
+                            [_vm._v("Удалить")]
+                          )
+                        ]
                       )
                     ],
                     1
@@ -45233,7 +45266,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container product-item-page" }, [
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-12 col-md-3" }, [
+      _c("div", { staticClass: "col-12 col-md-4" }, [
         _c(
           "div",
           { staticClass: "ProductColorHooper_wrapper" },
@@ -45262,6 +45295,7 @@ var render = function() {
               "hooper",
               {
                 ref: "ProductColorHooper",
+                staticClass: "ProductColorHooper",
                 attrs: { settings: _vm.ProductColorHooper }
               },
               _vm._l(_vm.product.colors, function(color, index) {
@@ -45278,8 +45312,10 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-12 col-md-9" }, [
-        _c("h1", [_vm._v(_vm._s(_vm.product.name))]),
+      _c("div", { staticClass: "col-12 col-md-8" }, [
+        _c("h1", { staticClass: "mt-0 mb-4" }, [
+          _vm._v(_vm._s(_vm.product.name))
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "row product-info-buttons" }, [
           _c("div", { staticClass: "col-6 col-md-3" }, [

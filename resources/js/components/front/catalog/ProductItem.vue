@@ -2,18 +2,18 @@
     <div class="container product-item-page">
 
         <div class="row">
-            <div class="col-12 col-md-3">
+            <div class="col-12 col-md-4">
                 <div class="ProductColorHooper_wrapper">
                     <button @click.prevent="slidePrev" class="hooper_nav_button hooper_nav_button_prev"></button>
                     <button @click.prevent="slideNext" class="hooper_nav_button hooper_nav_button_next"></button>
 
-                    <hooper ref="ProductColorHooper" :settings="ProductColorHooper">
+                    <hooper ref="ProductColorHooper" :settings="ProductColorHooper" class="ProductColorHooper">
                         <slide v-for="(color, index) in product.colors" :key="'product_color_' + color.id" class="product-colors-slide" v-bind:style="{ 'background-image': 'url(' + color.image + ')' }"></slide>
                     </hooper>
                 </div>
             </div>
-            <div class="col-12 col-md-9">
-                <h1>{{ product.name }}</h1>
+            <div class="col-12 col-md-8">
+                <h1 class="mt-0 mb-4">{{ product.name }}</h1>
 
                 <div class="row product-info-buttons">
                     <div class="col-6 col-md-3">
@@ -131,6 +131,8 @@ export default {
             price: '',
             ProductColorHooper: {
                 itemsToShow: 1,
+                transition: 250,
+                wheelControl: false,
             },
             modal_bg: false,
             modal_gdekupit: false,
@@ -154,7 +156,7 @@ export default {
             } else {
                 this.price = this.product.base_price
             }
-            
+
             this.$refs.ProductColorHooper.slideTo(index);
             
             var color_btns = document.querySelectorAll(".product-color-button");
