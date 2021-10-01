@@ -39,6 +39,10 @@ html, body {
     border-color: #60605e;
 }
 
+.admin_panel .navbar-collapse {
+    justify-content: end;
+}
+
 .admin-search-clear {
     position: absolute;
     right: 15px;

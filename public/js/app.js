@@ -2379,6 +2379,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2623,6 +2632,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2667,6 +2680,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
 //
 //
 //
@@ -44159,99 +44176,110 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("header", [
-      _c(
-        "nav",
-        { staticClass: "navbar navbar-expand-md navbar-light bg-light mb-4" },
-        [
-          _c(
-            "div",
-            { staticClass: "container" },
-            [
-              _c(
-                "router-link",
-                {
-                  staticClass: "navbar-brand",
-                  attrs: { to: { name: "Products" } }
-                },
-                [_vm._v("Админка")]
-              ),
-              _vm._v(" "),
-              _vm._m(0),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "collapse navbar-collapse",
-                  attrs: { id: "navbarCollapse" }
-                },
-                [
-                  _c("ul", { staticClass: "navbar-nav me-auto mb-2 mb-md-0" }, [
+  return _c(
+    "div",
+    {
+      staticClass: "admin_panel bg-light",
+      staticStyle: { "min-height": "100vh" }
+    },
+    [
+      _c("header", [
+        _c(
+          "nav",
+          { staticClass: "navbar navbar-expand-md navbar-dark bg-dark mb-4" },
+          [
+            _c(
+              "div",
+              { staticClass: "container" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "navbar-brand",
+                    attrs: { to: { name: "Products" } }
+                  },
+                  [_vm._v("БашДвери :: панель управления")]
+                ),
+                _vm._v(" "),
+                _vm._m(0),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "collapse navbar-collapse",
+                    attrs: { id: "navbarCollapse" }
+                  },
+                  [
                     _c(
-                      "li",
-                      { staticClass: "nav-item" },
+                      "div",
+                      { staticClass: "d-flex" },
                       [
+                        _c(
+                          "ul",
+                          { staticClass: "navbar-nav mb-2 me-2 mb-md-0" },
+                          [
+                            _c(
+                              "li",
+                              { staticClass: "nav-item" },
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass: "nav-link",
+                                    attrs: { to: { name: "Products" } }
+                                  },
+                                  [_vm._v("Каталог")]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "li",
+                              { staticClass: "nav-item" },
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass: "nav-link",
+                                    attrs: { to: { name: "TempFiles" } }
+                                  },
+                                  [_vm._v("Файлы")]
+                                )
+                              ],
+                              1
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
                         _c(
                           "router-link",
                           {
-                            staticClass: "nav-link",
-                            attrs: { to: { name: "Products" } }
+                            staticClass: "btn btn-secondary",
+                            attrs: { to: { name: "Home" } }
                           },
-                          [_vm._v("Каталог")]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      { staticClass: "nav-item" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "nav-link",
-                            attrs: { to: { name: "TempFiles" } }
-                          },
-                          [_vm._v("Файлы")]
+                          [_vm._v("Выйти")]
                         )
                       ],
                       1
                     )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "d-flex" },
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "nav-link",
-                          attrs: { to: { name: "Home" } }
-                        },
-                        [_vm._v("Фронт")]
-                      )
-                    ],
-                    1
-                  )
-                ]
-              )
-            ],
-            1
-          )
-        ]
+                  ]
+                )
+              ],
+              1
+            )
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "container" },
+        [_c("router-view", { key: _vm.$route.path })],
+        1
       )
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "container" },
-      [_c("router-view", { key: _vm.$route.path })],
-      1
-    )
-  ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -44442,435 +44470,460 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h1", [_vm._v(_vm._s(_vm.product.name))]),
+    _c("h1", { staticClass: "mt-0 mb-4" }, [_vm._v(_vm._s(_vm.product.name))]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-12 col-md-4" }, [
-        _c("div", { staticClass: "mb-3" }, [
-          _c("label", { staticClass: "form-label" }, [_vm._v("Название")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.name,
-                expression: "name"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text" },
-            domProps: { value: _vm.name },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+        _c("div", { staticClass: "card shadow-sm mb-4" }, [
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "mb-3" }, [
+              _c("label", { staticClass: "form-label" }, [_vm._v("Название")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.name,
+                    expression: "name"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.name },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.name = $event.target.value
+                  }
                 }
-                _vm.name = $event.target.value
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "mb-3" }, [
-          _c("label", { staticClass: "form-label" }, [_vm._v("Базовая цена")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.base_price,
-                expression: "base_price"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text" },
-            domProps: { value: _vm.base_price },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "mb-3" }, [
+              _c("label", { staticClass: "form-label" }, [
+                _vm._v("Базовая цена")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.base_price,
+                    expression: "base_price"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.base_price },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.base_price = $event.target.value
+                  }
                 }
-                _vm.base_price = $event.target.value
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "mb-3" }, [
-          _c("label", { staticClass: "form-label" }, [_vm._v("Старая цена")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.old_price,
-                expression: "old_price"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text" },
-            domProps: { value: _vm.old_price },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "mb-3" }, [
+              _c("label", { staticClass: "form-label" }, [
+                _vm._v("Старая цена")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.old_price,
+                    expression: "old_price"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.old_price },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.old_price = $event.target.value
+                  }
                 }
-                _vm.old_price = $event.target.value
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "mb-3" }, [
-          _c("label", { staticClass: "form-label" }, [_vm._v("Описание")]),
-          _vm._v(" "),
-          _c("textarea", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.description,
-                expression: "description"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { rows: "5" },
-            domProps: { value: _vm.description },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "mb-3" }, [
+              _c("label", { staticClass: "form-label" }, [_vm._v("Описание")]),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.description,
+                    expression: "description"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { rows: "5" },
+                domProps: { value: _vm.description },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.description = $event.target.value
+                  }
                 }
-                _vm.description = $event.target.value
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary",
-            on: {
-              click: function($event) {
-                return _vm.saveProduct(_vm.product.id)
-              }
-            }
-          },
-          [_vm._v("Сохранить")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-12 col-md-8" }, [
-        _c("div", { staticClass: "row align-items-center mb-2" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-6 text-end" }, [
+              })
+            ]),
+            _vm._v(" "),
             _c(
               "button",
               {
-                staticClass: "btn btn-sm btn-primary",
+                staticClass: "btn btn-primary",
                 on: {
                   click: function($event) {
-                    _vm.modal_add_new_color = true
+                    return _vm.saveProduct(_vm.product.id)
                   }
                 }
               },
-              [_vm._v("Добавить цвет")]
+              [_vm._v("Сохранить")]
             )
           ])
-        ]),
-        _vm._v(" "),
-        _c("table", { staticClass: "table table-hover" }, [
-          _c(
-            "tbody",
-            _vm._l(_vm.product.colors, function(product_color) {
-              return _c("tr", { key: "product_color_" + product_color.id }, [
-                _c("td", { staticStyle: { width: "100px" } }, [
-                  _c("img", {
-                    staticStyle: { width: "auto", height: "50px" },
-                    attrs: { src: product_color.image }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _vm._v(
-                    "\n                            " +
-                      _vm._s(product_color.name) +
-                      "\n                        "
-                  )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  [
-                    product_color.price
-                      ? [
-                          _vm._v(
-                            "\n                                " +
-                              _vm._s(product_color.price) +
-                              " ₽\n                            "
-                          )
-                        ]
-                      : _vm._e()
-                  ],
-                  2
-                ),
-                _vm._v(" "),
-                _c("td", { staticStyle: { "text-align": "right" } }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-sm btn-outline-secondary",
-                      on: {
-                        click: function($event) {
-                          _vm.EditColor(product_color.id),
-                            (_vm.edit_color_id = product_color.id)
-                        }
-                      }
-                    },
-                    [_vm._v("Изменить")]
-                  )
-                ])
-              ])
-            }),
-            0
-          )
-        ]),
-        _vm._v(" "),
-        _vm.modal_add_new_color
-          ? _c("div", { staticClass: "modal", attrs: { tabindex: "-1" } }, [
-              _c("div", { staticClass: "modal-dialog" }, [
-                _c("div", { staticClass: "modal-content" }, [
-                  _c("div", { staticClass: "modal-header" }, [
-                    _c("h5", { staticClass: "modal-title" }, [
-                      _vm._v("Новый цвет")
-                    ]),
-                    _vm._v(" "),
-                    _c("button", {
-                      staticClass: "btn-close",
-                      attrs: { type: "button" },
-                      on: {
-                        click: function($event) {
-                          return _vm.close_add_color_modal()
-                        }
-                      }
-                    })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-12 col-md-8" }, [
+        _c("div", { staticClass: "card shadow-sm" }, [
+          _c("div", { staticClass: "card-body" }, [
+            _c("table", { staticClass: "table table-hover mb-0" }, [
+              _c("thead", [
+                _c("tr", [
+                  _c("th"),
+                  _vm._v(" "),
+                  _c("th", [_vm._v("Цвет")]),
+                  _vm._v(" "),
+                  _c("th", { staticStyle: { "text-align": "right" } }, [
+                    _vm._v("Цена")
                   ]),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "modal-body" },
-                    [
-                      _c("file-pond", {
-                        ref: "new_color_image",
-                        attrs: {
-                          name: "new_color_image",
-                          "label-idle": "Выбрать картинку...",
-                          "allow-multiple": false,
-                          "accepted-file-types": "image/jpeg, image/png",
-                          server: "/api/product/add_color_image_upload",
-                          files: _vm.color_filepond_files
+                  _c("th", { staticStyle: { "text-align": "right" } }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-sm btn-primary",
+                        on: {
+                          click: function($event) {
+                            _vm.modal_add_new_color = true
+                          }
                         }
-                      }),
+                      },
+                      [_vm._v("Добавить цвет")]
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.product.colors, function(product_color) {
+                  return _c(
+                    "tr",
+                    { key: "product_color_" + product_color.id },
+                    [
+                      _c(
+                        "td",
+                        {
+                          staticStyle: {
+                            width: "100px",
+                            "text-align": "center"
+                          }
+                        },
+                        [
+                          _c("img", {
+                            staticStyle: { width: "auto", height: "50px" },
+                            attrs: { src: product_color.image }
+                          })
+                        ]
+                      ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "mb-3" }, [
-                        _c("label", { staticClass: "form-label" }, [
-                          _vm._v("Цвет")
+                      _c("td", [
+                        _vm._v(
+                          "\n                                    " +
+                            _vm._s(product_color.name) +
+                            "\n                                "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { staticStyle: { "text-align": "right" } },
+                        [
+                          product_color.price
+                            ? [
+                                _vm._v(
+                                  "\n                                        " +
+                                    _vm._s(product_color.price) +
+                                    " ₽\n                                    "
+                                )
+                              ]
+                            : _vm._e()
+                        ],
+                        2
+                      ),
+                      _vm._v(" "),
+                      _c("td", { staticStyle: { "text-align": "right" } }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-sm btn-outline-secondary",
+                            on: {
+                              click: function($event) {
+                                _vm.EditColor(product_color.id),
+                                  (_vm.edit_color_id = product_color.id)
+                              }
+                            }
+                          },
+                          [_vm._v("Изменить")]
+                        )
+                      ])
+                    ]
+                  )
+                }),
+                0
+              )
+            ]),
+            _vm._v(" "),
+            _vm.modal_add_new_color
+              ? _c("div", { staticClass: "modal", attrs: { tabindex: "-1" } }, [
+                  _c("div", { staticClass: "modal-dialog" }, [
+                    _c("div", { staticClass: "modal-content" }, [
+                      _c("div", { staticClass: "modal-header" }, [
+                        _c("h5", { staticClass: "modal-title" }, [
+                          _vm._v("Новый цвет")
                         ]),
                         _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.new_color_name,
-                              expression: "new_color_name"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.new_color_name },
+                        _c("button", {
+                          staticClass: "btn-close",
+                          attrs: { type: "button" },
                           on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.new_color_name = $event.target.value
+                            click: function($event) {
+                              return _vm.close_add_color_modal()
                             }
                           }
                         })
                       ]),
                       _vm._v(" "),
                       _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-primary",
-                          on: {
-                            click: function($event) {
-                              return _vm.saveColor(_vm.product.id)
-                            }
-                          }
-                        },
-                        [_vm._v("Добавить цвет")]
-                      )
-                    ],
-                    1
-                  )
-                ])
-              ])
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.modal_edit_color
-          ? _c("div", { staticClass: "modal", attrs: { tabindex: "-1" } }, [
-              _c("div", { staticClass: "modal-dialog" }, [
-                _c("div", { staticClass: "modal-content" }, [
-                  _c("div", { staticClass: "modal-header" }, [
-                    _c("h5", { staticClass: "modal-title" }, [
-                      _vm._v("Изменить цвет")
-                    ]),
-                    _vm._v(" "),
-                    _c("button", {
-                      staticClass: "btn-close",
-                      attrs: { type: "button" },
-                      on: {
-                        click: function($event) {
-                          return _vm.close_edit_color_modal()
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "modal-body" },
-                    [
-                      _c("file-pond", {
-                        ref: "edit_color_image",
-                        attrs: {
-                          name: "edit_color_image",
-                          "label-idle": "Выбрать картинку...",
-                          "allow-multiple": false,
-                          "accepted-file-types": "image/jpeg, image/png",
-                          server: _vm.server,
-                          files: _vm.color_filepond_files_edit
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "row mb-4" }, [
-                        _c("div", { staticClass: "col-8" }, [
-                          _c("label", { staticClass: "form-label" }, [
-                            _vm._v("Цвет")
-                          ]),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.edit_color_name,
-                                expression: "edit_color_name"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: { type: "text" },
-                            domProps: { value: _vm.edit_color_name },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.edit_color_name = $event.target.value
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-4" }, [
-                          _c("label", { staticClass: "form-label" }, [
-                            _vm._v("Цена")
-                          ]),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.edit_color_price,
-                                expression: "edit_color_price"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: { type: "text" },
-                            domProps: { value: _vm.edit_color_price },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.edit_color_price = $event.target.value
-                              }
-                            }
-                          })
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c(
                         "div",
-                        { staticClass: "d-flex justify-content-between" },
+                        { staticClass: "modal-body" },
                         [
+                          _c("file-pond", {
+                            ref: "new_color_image",
+                            attrs: {
+                              name: "new_color_image",
+                              "label-idle": "Выбрать картинку...",
+                              "allow-multiple": false,
+                              "accepted-file-types": "image/jpeg, image/png",
+                              server: "/api/product/add_color_image_upload",
+                              files: _vm.color_filepond_files
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "mb-3" }, [
+                            _c("label", { staticClass: "form-label" }, [
+                              _vm._v("Цвет")
+                            ]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.new_color_name,
+                                  expression: "new_color_name"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { type: "text" },
+                              domProps: { value: _vm.new_color_name },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.new_color_name = $event.target.value
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
                           _c(
                             "button",
                             {
                               staticClass: "btn btn-primary",
                               on: {
                                 click: function($event) {
-                                  return _vm.updateColor(_vm.edit_color_id)
+                                  return _vm.saveColor(_vm.product.id)
                                 }
                               }
                             },
-                            [_vm._v("Сохранить")]
-                          ),
+                            [_vm._v("Добавить цвет")]
+                          )
+                        ],
+                        1
+                      )
+                    ])
+                  ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.modal_edit_color
+              ? _c("div", { staticClass: "modal", attrs: { tabindex: "-1" } }, [
+                  _c("div", { staticClass: "modal-dialog" }, [
+                    _c("div", { staticClass: "modal-content" }, [
+                      _c("div", { staticClass: "modal-header" }, [
+                        _c("h5", { staticClass: "modal-title" }, [
+                          _vm._v("Изменить цвет")
+                        ]),
+                        _vm._v(" "),
+                        _c("button", {
+                          staticClass: "btn-close",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.close_edit_color_modal()
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "modal-body" },
+                        [
+                          _c("file-pond", {
+                            ref: "edit_color_image",
+                            attrs: {
+                              name: "edit_color_image",
+                              "label-idle": "Выбрать картинку...",
+                              "allow-multiple": false,
+                              "accepted-file-types": "image/jpeg, image/png",
+                              server: _vm.server,
+                              files: _vm.color_filepond_files_edit
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "row mb-4" }, [
+                            _c("div", { staticClass: "col-8" }, [
+                              _c("label", { staticClass: "form-label" }, [
+                                _vm._v("Цвет")
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.edit_color_name,
+                                    expression: "edit_color_name"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.edit_color_name },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.edit_color_name = $event.target.value
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-4" }, [
+                              _c("label", { staticClass: "form-label" }, [
+                                _vm._v("Цена")
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.edit_color_price,
+                                    expression: "edit_color_price"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.edit_color_price },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.edit_color_price = $event.target.value
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
                           _vm._v(" "),
                           _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-outline-danger",
-                              on: {
-                                click: function($event) {
-                                  return _vm.deleteColor(_vm.edit_color_id)
-                                }
-                              }
-                            },
-                            [_vm._v("Удалить")]
+                            "div",
+                            { staticClass: "d-flex justify-content-between" },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-primary",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.updateColor(_vm.edit_color_id)
+                                    }
+                                  }
+                                },
+                                [_vm._v("Сохранить")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-outline-danger",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.deleteColor(_vm.edit_color_id)
+                                    }
+                                  }
+                                },
+                                [_vm._v("Удалить")]
+                              )
+                            ]
                           )
-                        ]
+                        ],
+                        1
                       )
-                    ],
-                    1
-                  )
+                    ])
+                  ])
                 ])
-              ])
-            ])
-          : _vm._e()
+              : _vm._e()
+          ])
+        ])
       ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6" }, [
-      _c("label", { staticClass: "form-label mb-0" }, [_vm._v("Цвета")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -44960,56 +45013,64 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _vm.filteredProducts && _vm.filteredProducts.length > 0
-      ? _c("table", { staticClass: "table table-striped table-hover" }, [
-          _vm._m(1),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            _vm._l(_vm.filteredProducts, function(product) {
-              return _c("tr", { key: "product_" + product.id }, [
-                _c("td", [
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(product.name) +
-                      "\n                "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(product.base_price) +
-                      " ₽\n                "
-                  )
-                ]),
+    _c("div", { staticClass: "card shadow-sm mb-4" }, [
+      _c("div", { staticClass: "card-body" }, [
+        _vm.filteredProducts && _vm.filteredProducts.length > 0
+          ? _c(
+              "table",
+              { staticClass: "table table-striped table-hover mb-0" },
+              [
+                _vm._m(1),
                 _vm._v(" "),
                 _c(
-                  "td",
-                  { staticStyle: { "text-align": "right" } },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "btn btn-sm btn-warning",
-                        attrs: {
-                          to: {
-                            name: "ProductEdit",
-                            params: { id: product.id }
-                          }
-                        }
-                      },
-                      [_vm._v("Изменить")]
-                    )
-                  ],
-                  1
+                  "tbody",
+                  _vm._l(_vm.filteredProducts, function(product) {
+                    return _c("tr", { key: "product_" + product.id }, [
+                      _c("td", [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(product.name) +
+                            "\n                        "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(product.base_price) +
+                            " ₽\n                        "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { staticStyle: { "text-align": "right" } },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "btn btn-sm btn-outline-primary",
+                              attrs: {
+                                to: {
+                                  name: "ProductEdit",
+                                  params: { id: product.id }
+                                }
+                              }
+                            },
+                            [_vm._v("Изменить")]
+                          )
+                        ],
+                        1
+                      )
+                    ])
+                  }),
+                  0
                 )
-              ])
-            }),
-            0
-          )
-        ])
-      : _c("p", [_vm._v("Ничего не найдено 😔")])
+              ]
+            )
+          : _c("p", { staticClass: "mb-0" }, [_vm._v("Ничего не найдено 😔")])
+      ])
+    ])
   ])
 }
 var staticRenderFns = [
@@ -45018,7 +45079,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-12 col-md-4" }, [
-      _c("h1", [_vm._v("Каталог")])
+      _c("h1", { staticClass: "mt-0 mb-0" }, [_vm._v("Каталог")])
     ])
   },
   function() {
@@ -45061,47 +45122,53 @@ var render = function() {
   return _c("div", [
     _c("h1", [_vm._v("Временные файлы")]),
     _vm._v(" "),
-    _c("table", { staticClass: "table table-striped table-hover" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "tbody",
-        _vm._l(_vm.temp_files, function(file) {
-          return _c("tr", { key: "temp_file_" + file.id }, [
-            _c("td", [
-              _vm._v(
-                "\n                    " +
-                  _vm._s(file.filename) +
-                  "\n                "
-              )
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                "\n                    " +
-                  _vm._s(file.folder) +
-                  "\n                "
-              )
-            ]),
-            _vm._v(" "),
-            _c("td", { staticStyle: { "text-align": "right" } }, [
+    _c("div", { staticClass: "card shadow-sm mb-4" }, [
+      _c("div", { staticClass: "card-body" }, [
+        _vm.temp_files && _vm.temp_files.length > 0
+          ? _c("table", { staticClass: "table table-striped table-hover" }, [
+              _vm._m(0),
+              _vm._v(" "),
               _c(
-                "button",
-                {
-                  staticClass: "btn btn-sm btn-danger",
-                  on: {
-                    click: function($event) {
-                      return _vm.deleteTempFile(file.id)
-                    }
-                  }
-                },
-                [_vm._v("Удалить")]
+                "tbody",
+                _vm._l(_vm.temp_files, function(file) {
+                  return _c("tr", { key: "temp_file_" + file.id }, [
+                    _c("td", [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(file.filename) +
+                          "\n                        "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(file.folder) +
+                          "\n                        "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticStyle: { "text-align": "right" } }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-sm btn-danger",
+                          on: {
+                            click: function($event) {
+                              return _vm.deleteTempFile(file.id)
+                            }
+                          }
+                        },
+                        [_vm._v("Удалить")]
+                      )
+                    ])
+                  ])
+                }),
+                0
               )
             ])
-          ])
-        }),
-        0
-      )
+          : _c("p", { staticClass: "mb-0" }, [_vm._v("Файлов нет")])
+      ])
     ])
   ])
 }

@@ -1,126 +1,135 @@
 <template>
     <div>
-        <h1>{{ product.name }}</h1>
+        <h1 class="mt-0 mb-4">{{ product.name }}</h1>
 
         <div class="row">
             <div class="col-12 col-md-4">
-                <div class="mb-3">
-                    <label class="form-label">Название</label>
-                    <input v-model="name" type="text" class="form-control">
-                </div>
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label">Название</label>
+                            <input v-model="name" type="text" class="form-control">
+                        </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Базовая цена</label>
-                    <input v-model="base_price" type="text" class="form-control">
-                </div>
+                        <div class="mb-3">
+                            <label class="form-label">Базовая цена</label>
+                            <input v-model="base_price" type="text" class="form-control">
+                        </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Старая цена</label>
-                    <input v-model="old_price" type="text" class="form-control">
-                </div>
+                        <div class="mb-3">
+                            <label class="form-label">Старая цена</label>
+                            <input v-model="old_price" type="text" class="form-control">
+                        </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Описание</label>
-                    <textarea v-model="description" rows="5" class="form-control"></textarea>
-                </div>
+                        <div class="mb-3">
+                            <label class="form-label">Описание</label>
+                            <textarea v-model="description" rows="5" class="form-control"></textarea>
+                        </div>
 
-                <button @click="saveProduct(product.id)" class="btn btn-primary">Сохранить</button>
+                        <button @click="saveProduct(product.id)" class="btn btn-primary">Сохранить</button>
+                    </div>
+                </div>
             </div>
             <div class="col-12 col-md-8">
-                
-                <div class="row align-items-center mb-2">
-                    <div class="col-6">
-                        <label class="form-label mb-0">Цвета</label>
-                    </div>
-                    <div class="col-6 text-end">
-                        <button @click="modal_add_new_color = true" class="btn btn-sm btn-primary">Добавить цвет</button>
-                    </div>
-                </div>
+                <div class="card shadow-sm">
+                    <div class="card-body">
 
-                <table class="table table-hover">
-                    <tbody>
-                        <tr v-for="product_color in product.colors" :key="'product_color_' + product_color.id">
-                            <td style="width: 100px;">
-                                <img :src="product_color.image" style="width: auto; height:50px;"/>
-                            </td>
-                            <td>
-                                {{ product_color.name }}
-                            </td>
-                            <td>
-                                <template v-if="product_color.price">
-                                    {{ product_color.price }} ₽
-                                </template>
-                            </td>
-                            <td style="text-align: right;">
-                                <button @click="EditColor(product_color.id), edit_color_id = product_color.id" class="btn btn-sm btn-outline-secondary">Изменить</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                        <table class="table table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Цвет</th>
+                                    <th style="text-align: right;">Цена</th>
+                                    <th style="text-align: right;">
+                                        <button @click="modal_add_new_color = true" class="btn btn-sm btn-primary">Добавить цвет</button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="product_color in product.colors" :key="'product_color_' + product_color.id">
+                                    <td style="width: 100px; text-align: center;">
+                                        <img :src="product_color.image" style="width: auto; height:50px;"/>
+                                    </td>
+                                    <td>
+                                        {{ product_color.name }}
+                                    </td>
+                                    <td style="text-align: right;">
+                                        <template v-if="product_color.price">
+                                            {{ product_color.price }} ₽
+                                        </template>
+                                    </td>
+                                    <td style="text-align: right;">
+                                        <button @click="EditColor(product_color.id), edit_color_id = product_color.id" class="btn btn-sm btn-outline-secondary">Изменить</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                <div v-if="modal_add_new_color" class="modal" tabindex="-1">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Новый цвет</h5>
-                                <button @click="close_add_color_modal()" type="button" class="btn-close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <file-pond
-                                    name="new_color_image"
-                                    ref="new_color_image"
-                                    label-idle="Выбрать картинку..."
-                                    v-bind:allow-multiple="false"
-                                    accepted-file-types="image/jpeg, image/png"
-                                    server="/api/product/add_color_image_upload"
-                                    v-bind:files="color_filepond_files"
-                                />
-                                <div class="mb-3">
-                                    <label class="form-label">Цвет</label>
-                                    <input v-model="new_color_name" type="text" class="form-control">
-                                </div>
-                                <button @click="saveColor(product.id)" class="btn btn-primary">Добавить цвет</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div v-if="modal_edit_color" class="modal" tabindex="-1">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Изменить цвет</h5>
-                                <button @click="close_edit_color_modal()" type="button" class="btn-close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <file-pond
-                                    name="edit_color_image"
-                                    ref="edit_color_image"
-                                    label-idle="Выбрать картинку..."
-                                    v-bind:allow-multiple="false"
-                                    accepted-file-types="image/jpeg, image/png"
-                                    :server="server"
-                                    v-bind:files="color_filepond_files_edit"
-                                />
-                                <div class="row mb-4">
-                                    <div class="col-8">
-                                        <label class="form-label">Цвет</label>
-                                        <input v-model="edit_color_name" type="text" class="form-control">
+                        <div v-if="modal_add_new_color" class="modal" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Новый цвет</h5>
+                                        <button @click="close_add_color_modal()" type="button" class="btn-close"></button>
                                     </div>
-                                    <div class="col-4">
-                                        <label class="form-label">Цена</label>
-                                        <input v-model="edit_color_price" type="text" class="form-control">
+                                    <div class="modal-body">
+                                        <file-pond
+                                            name="new_color_image"
+                                            ref="new_color_image"
+                                            label-idle="Выбрать картинку..."
+                                            v-bind:allow-multiple="false"
+                                            accepted-file-types="image/jpeg, image/png"
+                                            server="/api/product/add_color_image_upload"
+                                            v-bind:files="color_filepond_files"
+                                        />
+                                        <div class="mb-3">
+                                            <label class="form-label">Цвет</label>
+                                            <input v-model="new_color_name" type="text" class="form-control">
+                                        </div>
+                                        <button @click="saveColor(product.id)" class="btn btn-primary">Добавить цвет</button>
                                     </div>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <button @click="updateColor(edit_color_id)" class="btn btn-primary">Сохранить</button>
-                                    <button @click="deleteColor(edit_color_id)" class="btn btn-outline-danger">Удалить</button>
                                 </div>
                             </div>
                         </div>
+
+                        <div v-if="modal_edit_color" class="modal" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Изменить цвет</h5>
+                                        <button @click="close_edit_color_modal()" type="button" class="btn-close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <file-pond
+                                            name="edit_color_image"
+                                            ref="edit_color_image"
+                                            label-idle="Выбрать картинку..."
+                                            v-bind:allow-multiple="false"
+                                            accepted-file-types="image/jpeg, image/png"
+                                            :server="server"
+                                            v-bind:files="color_filepond_files_edit"
+                                        />
+                                        <div class="row mb-4">
+                                            <div class="col-8">
+                                                <label class="form-label">Цвет</label>
+                                                <input v-model="edit_color_name" type="text" class="form-control">
+                                            </div>
+                                            <div class="col-4">
+                                                <label class="form-label">Цена</label>
+                                                <input v-model="edit_color_price" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <button @click="updateColor(edit_color_id)" class="btn btn-primary">Сохранить</button>
+                                            <button @click="deleteColor(edit_color_id)" class="btn btn-outline-danger">Удалить</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-
             </div>
         </div>
 
