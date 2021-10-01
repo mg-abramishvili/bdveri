@@ -2778,15 +2778,111 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       product: {},
-      indexHooper: {
+      ProductColorHooper: {
         itemsToShow: 1
-      }
+      },
+      modal_gdekupit: false,
+      modal_kakoplatit: false,
+      modal_zamer: false,
+      modal_zvonok: false
     };
   },
   created: function created() {
@@ -2802,6 +2898,38 @@ __webpack_require__.r(__webpack_exports__);
     },
     slideNext: function slideNext() {
       this.$refs.ProductColorHooper.slideNext();
+    },
+    open_gdekupit_modal: function open_gdekupit_modal() {
+      this.modal_gdekupit = true;
+      this.modal_bg = true;
+    },
+    close_gdekupit_modal: function close_gdekupit_modal() {
+      this.modal_gdekupit = false;
+      this.modal_bg = false;
+    },
+    open_kakoplatit_modal: function open_kakoplatit_modal() {
+      this.modal_kakoplatit = true;
+      this.modal_bg = true;
+    },
+    close_kakoplatit_modal: function close_kakoplatit_modal() {
+      this.modal_kakoplatit = false;
+      this.modal_bg = false;
+    },
+    open_zamer_modal: function open_zamer_modal() {
+      this.modal_zamer = true;
+      this.modal_bg = true;
+    },
+    close_zamer_modal: function close_zamer_modal() {
+      this.modal_zamer = false;
+      this.modal_bg = false;
+    },
+    open_zvonok_modal: function open_zvonok_modal() {
+      this.modal_zvonok = true;
+      this.modal_bg = true;
+    },
+    close_zvonok_modal: function close_zvonok_modal() {
+      this.modal_zvonok = false;
+      this.modal_bg = false;
     }
   },
   components: {
@@ -45083,7 +45211,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
+  return _c("div", { staticClass: "container product-item-page" }, [
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-12 col-md-3" }, [
         _c(
@@ -45133,6 +45261,200 @@ var render = function() {
       _c("div", { staticClass: "col-12 col-md-9" }, [
         _c("h1", [_vm._v(_vm._s(_vm.product.name))]),
         _vm._v(" "),
+        _c("div", { staticClass: "row product-info-buttons" }, [
+          _c("div", { staticClass: "col-6 col-md-3" }, [
+            _c(
+              "button",
+              {
+                on: {
+                  click: function($event) {
+                    return _vm.open_gdekupit_modal()
+                  }
+                }
+              },
+              [
+                _c("img", { attrs: { src: "/img/ico-location.svg" } }),
+                _vm._v(" "),
+                _c("span", [_vm._v("Где купить?")])
+              ]
+            ),
+            _vm._v(" "),
+            _vm.modal_gdekupit
+              ? _c("div", { staticClass: "modal", attrs: { tabindex: "-1" } }, [
+                  _c("div", { staticClass: "modal-dialog" }, [
+                    _c("div", { staticClass: "modal-content" }, [
+                      _c("div", { staticClass: "modal-header" }, [
+                        _c("h5", { staticClass: "modal-title" }, [
+                          _vm._v("Где купить?")
+                        ]),
+                        _vm._v(" "),
+                        _c("button", {
+                          staticClass: "btn-close",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.close_gdekupit_modal()
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "modal-body" }, [
+                        _vm._v(
+                          "\n                                    Где купить текст.\n                                "
+                        )
+                      ])
+                    ])
+                  ])
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-6 col-md-3" }, [
+            _c(
+              "button",
+              {
+                on: {
+                  click: function($event) {
+                    return _vm.open_kakoplatit_modal()
+                  }
+                }
+              },
+              [
+                _c("img", { attrs: { src: "/img/ico-card.svg" } }),
+                _vm._v(" "),
+                _c("span", [_vm._v("Как оплатить?")])
+              ]
+            ),
+            _vm._v(" "),
+            _vm.modal_kakoplatit
+              ? _c("div", { staticClass: "modal", attrs: { tabindex: "-1" } }, [
+                  _c("div", { staticClass: "modal-dialog" }, [
+                    _c("div", { staticClass: "modal-content" }, [
+                      _c("div", { staticClass: "modal-header" }, [
+                        _c("h5", { staticClass: "modal-title" }, [
+                          _vm._v("Как оплатить?")
+                        ]),
+                        _vm._v(" "),
+                        _c("button", {
+                          staticClass: "btn-close",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.close_kakoplatit_modal()
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "modal-body" }, [
+                        _vm._v(
+                          "\n                                    Оплата текст.\n                                "
+                        )
+                      ])
+                    ])
+                  ])
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-6 col-md-3" }, [
+            _c(
+              "button",
+              {
+                on: {
+                  click: function($event) {
+                    return _vm.open_zamer_modal()
+                  }
+                }
+              },
+              [
+                _c("img", { attrs: { src: "/img/ico-size.svg" } }),
+                _vm._v(" "),
+                _c("span", [_vm._v("Заказать замер")])
+              ]
+            ),
+            _vm._v(" "),
+            _vm.modal_zamer
+              ? _c("div", { staticClass: "modal", attrs: { tabindex: "-1" } }, [
+                  _c("div", { staticClass: "modal-dialog" }, [
+                    _c("div", { staticClass: "modal-content" }, [
+                      _c("div", { staticClass: "modal-header" }, [
+                        _c("h5", { staticClass: "modal-title" }, [
+                          _vm._v("Заказать замер")
+                        ]),
+                        _vm._v(" "),
+                        _c("button", {
+                          staticClass: "btn-close",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.close_zamer_modal()
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "modal-body" }, [
+                        _vm._v(
+                          "\n                                    Замер текст.\n                                "
+                        )
+                      ])
+                    ])
+                  ])
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-6 col-md-3" }, [
+            _c(
+              "button",
+              {
+                on: {
+                  click: function($event) {
+                    return _vm.open_zvonok_modal()
+                  }
+                }
+              },
+              [
+                _c("img", { attrs: { src: "/img/ico-alarm.svg" } }),
+                _vm._v(" "),
+                _c("span", [_vm._v("Обратный звонок")])
+              ]
+            ),
+            _vm._v(" "),
+            _vm.modal_zvonok
+              ? _c("div", { staticClass: "modal", attrs: { tabindex: "-1" } }, [
+                  _c("div", { staticClass: "modal-dialog" }, [
+                    _c("div", { staticClass: "modal-content" }, [
+                      _c("div", { staticClass: "modal-header" }, [
+                        _c("h5", { staticClass: "modal-title" }, [
+                          _vm._v("Обратный звонок")
+                        ]),
+                        _vm._v(" "),
+                        _c("button", {
+                          staticClass: "btn-close",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.close_zvonok_modal()
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "modal-body" }, [
+                        _vm._v(
+                          "\n                                    Звонок текст.\n                                "
+                        )
+                      ])
+                    ])
+                  ])
+                ])
+              : _vm._e()
+          ])
+        ]),
+        _vm._v(" "),
         _c(
           "ul",
           _vm._l(_vm.product.colors, function(color) {
@@ -45145,9 +45467,34 @@ var render = function() {
             ])
           }),
           0
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "price my-4" }, [
+          _c("del", { staticStyle: { "font-weight": "normal" } }, [
+            _vm._v(_vm._s(_vm.product.old_price) + " ₽")
+          ]),
+          _vm._v(
+            "\n                " +
+              _vm._s(_vm.product.base_price) +
+              " ₽\n            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("button", { staticClass: "btn-standard" }, [_vm._v("В корзину")])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _vm._v(
+          "\n            " + _vm._s(_vm.product.description) + "\n        "
         )
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _vm.modal_bg
+      ? _c("div", { staticClass: "modal-backdrop fade show" })
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
