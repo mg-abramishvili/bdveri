@@ -47,18 +47,18 @@
                             </thead>
                             <tbody>
                                 <tr v-for="product_color in product.colors" :key="'product_color_' + product_color.id">
-                                    <td style="width: 100px; text-align: center;">
-                                        <img :src="product_color.image" style="width: auto; height:50px;"/>
+                                    <td style="width: 10%; text-align: center;">
+                                        <img :src="product_color.image" style="width: auto; height: 50px;"/>
                                     </td>
-                                    <td>
+                                    <td style="width: 40%;">
                                         {{ product_color.name }}
                                     </td>
-                                    <td style="text-align: right;">
+                                    <td style="width: 20%; text-align: right;">
                                         <template v-if="product_color.price">
                                             {{ product_color.price }} ₽
                                         </template>
                                     </td>
-                                    <td style="text-align: right;">
+                                    <td style="width: 30%; text-align: right;">
                                         <button @click="EditColor(product_color.id), edit_color_id = product_color.id" class="btn btn-sm btn-outline-secondary">Изменить</button>
                                     </td>
                                 </tr>
@@ -146,15 +146,15 @@
                             </thead>
                             <tbody>
                                 <tr v-for="product_size in product.sizes" :key="'product_size_' + product_size.id">
-                                    <td>
+                                    <td style="width: 50%">
                                         {{ product_size.name }}
                                     </td>
-                                    <td style="text-align: right;">
+                                    <td style="width: 20%; text-align: right;">
                                         <template v-if="product_size.price">
                                             {{ product_size.price }} ₽
                                         </template>
                                     </td>
-                                    <td style="text-align: right;">
+                                    <td style="width: 30%; text-align: right;">
                                         <button @click="EditSize(product_size.id), edit_size_id = product_size.id" class="btn btn-sm btn-outline-secondary">Изменить</button>
                                     </td>
                                 </tr>

@@ -44796,10 +44796,7 @@ var render = function() {
                       _c(
                         "td",
                         {
-                          staticStyle: {
-                            width: "100px",
-                            "text-align": "center"
-                          }
+                          staticStyle: { width: "10%", "text-align": "center" }
                         },
                         [
                           _c("img", {
@@ -44809,7 +44806,7 @@ var render = function() {
                         ]
                       ),
                       _vm._v(" "),
-                      _c("td", [
+                      _c("td", { staticStyle: { width: "40%" } }, [
                         _vm._v(
                           "\n                                    " +
                             _vm._s(product_color.name) +
@@ -44819,7 +44816,9 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "td",
-                        { staticStyle: { "text-align": "right" } },
+                        {
+                          staticStyle: { width: "20%", "text-align": "right" }
+                        },
                         [
                           product_color.price
                             ? [
@@ -44834,21 +44833,27 @@ var render = function() {
                         2
                       ),
                       _vm._v(" "),
-                      _c("td", { staticStyle: { "text-align": "right" } }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-sm btn-outline-secondary",
-                            on: {
-                              click: function($event) {
-                                _vm.EditColor(product_color.id),
-                                  (_vm.edit_color_id = product_color.id)
+                      _c(
+                        "td",
+                        {
+                          staticStyle: { width: "30%", "text-align": "right" }
+                        },
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-sm btn-outline-secondary",
+                              on: {
+                                click: function($event) {
+                                  _vm.EditColor(product_color.id),
+                                    (_vm.edit_color_id = product_color.id)
+                                }
                               }
-                            }
-                          },
-                          [_vm._v("Изменить")]
-                        )
-                      ])
+                            },
+                            [_vm._v("Изменить")]
+                          )
+                        ]
+                      )
                     ]
                   )
                 }),
@@ -45107,7 +45112,7 @@ var render = function() {
                 "tbody",
                 _vm._l(_vm.product.sizes, function(product_size) {
                   return _c("tr", { key: "product_size_" + product_size.id }, [
-                    _c("td", [
+                    _c("td", { staticStyle: { width: "50%" } }, [
                       _vm._v(
                         "\n                                    " +
                           _vm._s(product_size.name) +
@@ -45117,7 +45122,7 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "td",
-                      { staticStyle: { "text-align": "right" } },
+                      { staticStyle: { width: "20%", "text-align": "right" } },
                       [
                         product_size.price
                           ? [
@@ -45132,21 +45137,25 @@ var render = function() {
                       2
                     ),
                     _vm._v(" "),
-                    _c("td", { staticStyle: { "text-align": "right" } }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-sm btn-outline-secondary",
-                          on: {
-                            click: function($event) {
-                              _vm.EditSize(product_size.id),
-                                (_vm.edit_size_id = product_size.id)
+                    _c(
+                      "td",
+                      { staticStyle: { width: "30%", "text-align": "right" } },
+                      [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-sm btn-outline-secondary",
+                            on: {
+                              click: function($event) {
+                                _vm.EditSize(product_size.id),
+                                  (_vm.edit_size_id = product_size.id)
+                              }
                             }
-                          }
-                        },
-                        [_vm._v("Изменить")]
-                      )
-                    ])
+                          },
+                          [_vm._v("Изменить")]
+                        )
+                      ]
+                    )
                   ])
                 }),
                 0
