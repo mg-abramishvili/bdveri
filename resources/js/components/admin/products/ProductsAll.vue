@@ -1,15 +1,19 @@
 <template>
     <div>
-        <div class="row align-items-center">
-            <div class="col-12 col-md-6">
+        <div class="row align-items-center mb-4">
+            <div class="col-12 col-md-4">
                 <h1>Каталог</h1>
             </div>
-            <div class="col-12 col-md-6 text-end">
+            <div class="col-12 col-md-4" style="position: relative;">
+                <input v-model="search" type="text" class="form-control" placeholder="Поиск по названию">
+                <button @click="clearSearch()" v-if="search.length > 0" class="admin-search-clear">&times;</button>
+            </div>
+            <div class="col-12 col-md-4 text-end">
                 <router-link :to="{ name: 'ProductCreate' }" class="btn btn-primary">Добавить товар</router-link>
             </div>
         </div>
 
-        <table class="table table-striped table-hover">
+        <table v-if="filteredProducts && filteredProducts.length > 0" class="table table-striped table-hover">
             <thead>
                 <tr>
                     <th>Товар</th>
@@ -18,7 +22,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="product in products" :key="'product_' + product.id">
+                <tr v-for="product in filteredProducts" :key="'product_' + product.id">
                     <td>
                         {{ product.name }}
                     </td>
@@ -31,6 +35,7 @@
                 </tr>
             </tbody>
         </table>
+        <p v-else>Ничего не найдено &#128532;</p>
     </div>
 </template>
 
@@ -39,6 +44,7 @@
         data() {
             return {
                 products: [],
+                search: '',
             }
         },
         created() {
@@ -49,6 +55,16 @@
                 ));
         },
         methods: {
+            clearSearch() {
+                this.search = ''
+            }
+        },
+        computed: {
+            filteredProducts() {
+                return this.products.filter(product => {
+                    return product.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1
+                })
+            }
         },
         components: {
         }

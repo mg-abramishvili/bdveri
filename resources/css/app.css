@@ -39,6 +39,23 @@ html, body {
     border-color: #60605e;
 }
 
+.admin-search-clear {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    box-shadow: none;
+    background: none;
+    border: 0;
+    line-height: 0;
+    font-size: 25px;
+    color: #999;
+    font-weight: 100;
+    margin-top: -2px;
+}
+
 /* Product Item */
 .ProductColorHooper_wrapper {
     position: relative;
