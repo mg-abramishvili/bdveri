@@ -122,16 +122,19 @@ html, body {
     border: none;
     margin: 0;
 }
-.product-colors-list {
+.product-colors-list,
+.product-sizes-list {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
-.product-colors-list li {
+.product-colors-list li,
+.product-sizes-list li {
     display: inline-block;
     margin-right: 5px;
 }
-.product-color-button {
+.product-color-button,
+.product-size-button {
     cursor: pointer;
     padding: 8px 12px;
     line-height: 1;
@@ -141,7 +144,8 @@ html, body {
     margin: 0;
     font-size: 15px;
 }
-.product-color-button_active {
+.product-color-button_active,
+.product-size-button_active {
     border-color: #bea67c;
 }
 .product-item-page .price {

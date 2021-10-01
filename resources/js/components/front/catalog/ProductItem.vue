@@ -102,6 +102,14 @@
                     </li>
                 </ul>
 
+                <ul class="product-sizes-list mt-4">
+                    <li v-for="(size, index) in product.sizes" :key="'product_size_' + size.id">
+                        <button @click="chooseSize(index, size.id, size.name, size.price)" :id="'product_size_' + size.id" class="product-size-button">
+                            {{ size.name }}
+                        </button>
+                    </li>
+                </ul>
+
                 <div class="price my-4">
                     <del v-if="product.old_price" style="font-weight: normal;">{{ product.old_price }} ₽</del>
                     {{ price }} ₽
@@ -164,6 +172,19 @@ export default {
                 color_btns[i].classList.remove('product-color-button_active')
             }
             document.getElementById('product_color_' + id).classList.add('product-color-button_active')
+        },
+        chooseSize(index, id, name, price) {
+            if (price && parseInt(price) > parseInt(this.product.base_price)) {
+                this.price = price
+            } else {
+                this.price = this.product.base_price
+            }
+            
+            var size_btns = document.querySelectorAll(".product-size-button");
+            for (var i = 0; i < size_btns.length; i++) {
+                size_btns[i].classList.remove('product-size-button_active')
+            }
+            document.getElementById('product_size_' + id).classList.add('product-size-button_active')
         },
         slidePrev() {
             this.$refs.ProductColorHooper.slidePrev();

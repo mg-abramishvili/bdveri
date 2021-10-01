@@ -3075,6 +3075,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3117,6 +3125,21 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       document.getElementById('product_color_' + id).classList.add('product-color-button_active');
+    },
+    chooseSize: function chooseSize(index, id, name, price) {
+      if (price && parseInt(price) > parseInt(this.product.base_price)) {
+        this.price = price;
+      } else {
+        this.price = this.product.base_price;
+      }
+
+      var size_btns = document.querySelectorAll(".product-size-button");
+
+      for (var i = 0; i < size_btns.length; i++) {
+        size_btns[i].classList.remove('product-size-button_active');
+      }
+
+      document.getElementById('product_size_' + id).classList.add('product-size-button_active');
     },
     slidePrev: function slidePrev() {
       this.$refs.ProductColorHooper.slidePrev();
@@ -46116,6 +46139,40 @@ var render = function() {
                   _vm._v(
                     "\n                        " +
                       _vm._s(color.name) +
+                      "\n                    "
+                  )
+                ]
+              )
+            ])
+          }),
+          0
+        ),
+        _vm._v(" "),
+        _c(
+          "ul",
+          { staticClass: "product-sizes-list mt-4" },
+          _vm._l(_vm.product.sizes, function(size, index) {
+            return _c("li", { key: "product_size_" + size.id }, [
+              _c(
+                "button",
+                {
+                  staticClass: "product-size-button",
+                  attrs: { id: "product_size_" + size.id },
+                  on: {
+                    click: function($event) {
+                      return _vm.chooseSize(
+                        index,
+                        size.id,
+                        size.name,
+                        size.price
+                      )
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(size.name) +
                       "\n                    "
                   )
                 ]
