@@ -2870,15 +2870,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       product: {},
+      price: '',
       ProductColorHooper: {
         itemsToShow: 1
       },
+      modal_bg: false,
       modal_gdekupit: false,
       modal_kakoplatit: false,
       modal_zamer: false,
@@ -2889,10 +2893,20 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     axios.get("/api/product/".concat(this.$route.params.id)).then(function (response) {
-      return _this.product = response.data;
+      return _this.product = response.data, _this.price = _this.product.base_price;
     });
   },
   methods: {
+    chooseColor: function chooseColor(index, id, name, price) {
+      if (price && parseInt(price) > parseInt(this.product.base_price)) {
+        this.price = price;
+      } else {
+        this.price = this.product.base_price;
+      }
+
+      this.$refs.ProductColorHooper.slideTo(index);
+      console.log(index);
+    },
     slidePrev: function slidePrev() {
       this.$refs.ProductColorHooper.slidePrev();
     },
@@ -45244,7 +45258,7 @@ var render = function() {
                 ref: "ProductColorHooper",
                 attrs: { settings: _vm.ProductColorHooper }
               },
-              _vm._l(_vm.product.colors, function(color) {
+              _vm._l(_vm.product.colors, function(color, index) {
                 return _c("slide", {
                   key: "product_color_" + color.id,
                   staticClass: "product-colors-slide",
@@ -45457,12 +45471,29 @@ var render = function() {
         _vm._v(" "),
         _c(
           "ul",
-          _vm._l(_vm.product.colors, function(color) {
+          _vm._l(_vm.product.colors, function(color, index) {
             return _c("li", { key: "product_color_" + color.id }, [
-              _vm._v(
-                "\n                    " +
-                  _vm._s(color.name) +
-                  "\n                "
+              _c(
+                "button",
+                {
+                  on: {
+                    click: function($event) {
+                      return _vm.chooseColor(
+                        index,
+                        color.id,
+                        color.name,
+                        color.price
+                      )
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(color.name) +
+                      "\n                    "
+                  )
+                ]
               )
             ])
           }),
@@ -45473,11 +45504,7 @@ var render = function() {
           _c("del", { staticStyle: { "font-weight": "normal" } }, [
             _vm._v(_vm._s(_vm.product.old_price) + " ₽")
           ]),
-          _vm._v(
-            "\n                " +
-              _vm._s(_vm.product.base_price) +
-              " ₽\n            "
-          )
+          _vm._v("\n                " + _vm._s(_vm.price) + " ₽\n            ")
         ]),
         _vm._v(" "),
         _c("button", { staticClass: "btn-standard" }, [_vm._v("В корзину")])

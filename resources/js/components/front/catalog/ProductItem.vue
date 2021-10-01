@@ -8,7 +8,7 @@
                     <button @click.prevent="slideNext" class="hooper_nav_button hooper_nav_button_next"></button>
 
                     <hooper ref="ProductColorHooper" :settings="ProductColorHooper">
-                        <slide v-for="color in product.colors" :key="'product_color_' + color.id" class="product-colors-slide" v-bind:style="{ 'background-image': 'url(' + color.image + ')' }"></slide>
+                        <slide v-for="(color, index) in product.colors" :key="'product_color_' + color.id" class="product-colors-slide" v-bind:style="{ 'background-image': 'url(' + color.image + ')' }"></slide>
                     </hooper>
                 </div>
             </div>
@@ -95,14 +95,16 @@
                 </div>
 
                 <ul>
-                    <li v-for="color in product.colors" :key="'product_color_' + color.id">
-                        {{ color.name }}
+                    <li v-for="(color, index) in product.colors" :key="'product_color_' + color.id">
+                        <button @click="chooseColor(index, color.id, color.name, color.price)">
+                            {{ color.name }}
+                        </button>
                     </li>
                 </ul>
 
                 <div class="price my-4">
                     <del style="font-weight: normal;">{{ product.old_price }} ₽</del>
-                    {{ product.base_price }} ₽
+                    {{ price }} ₽
                 </div>
 
                 <button class="btn-standard">В корзину</button>
@@ -126,10 +128,11 @@ export default {
     data: function () {
         return {
             product: {},
+            price: '',
             ProductColorHooper: {
                 itemsToShow: 1,
             },
-
+            modal_bg: false,
             modal_gdekupit: false,
             modal_kakoplatit: false,
             modal_zamer: false,
@@ -140,10 +143,20 @@ export default {
             axios
                 .get(`/api/product/${this.$route.params.id}`)
                 .then(response => (
-                    this.product = response.data
+                    this.product = response.data,
+                    this.price = this.product.base_price
                 ));
         },
     methods: {
+        chooseColor(index, id, name, price) {
+            if (price && parseInt(price) > parseInt(this.product.base_price)) {
+                this.price = price
+            } else {
+                this.price = this.product.base_price
+            }
+            this.$refs.ProductColorHooper.slideTo(index);
+            console.log(index)
+        },
         slidePrev() {
             this.$refs.ProductColorHooper.slidePrev();
         },
