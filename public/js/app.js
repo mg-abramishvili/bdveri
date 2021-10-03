@@ -2189,28 +2189,126 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       name: '',
       base_price: '',
       old_price: '',
-      description: ''
+      description: '',
+      styles: [],
+      style: '',
+      types: [],
+      type: '',
+      productions: [],
+      production: '',
+      surfaces: [],
+      surface: '',
+      manufacturers: [],
+      manufacturer: '',
+      constructs: [],
+      construct: ''
     };
   },
-  created: function created() {},
+  created: function created() {
+    var _this = this;
+
+    axios.get('/api/styles').then(function (response) {
+      return _this.styles = response.data;
+    });
+    axios.get('/api/types').then(function (response) {
+      return _this.types = response.data;
+    });
+    axios.get('/api/manufacturers').then(function (response) {
+      return _this.manufacturers = response.data;
+    });
+    axios.get('/api/constructs').then(function (response) {
+      return _this.constructs = response.data;
+    });
+    axios.get('/api/surfaces').then(function (response) {
+      return _this.surfaces = response.data;
+    });
+    axios.get('/api/productions').then(function (response) {
+      return _this.productions = response.data;
+    });
+  },
   methods: {
     saveProduct: function saveProduct() {
-      var _this = this;
+      var _this2 = this;
 
       if (this.name.length > 0 && this.base_price.length > 0) {
         axios.post("/api/products", {
           name: this.name,
           base_price: this.base_price,
           old_price: this.old_price,
-          description: this.description
+          description: this.description,
+          manufacturer: this.manufacturer,
+          surface: this.surface,
+          production: this.production,
+          type: this.type,
+          construct: this.construct,
+          style: this.style
         }).then(function (response) {
-          return _this.$router.push({
+          return _this2.$router.push({
             name: 'Products'
           });
         })["catch"](function (error) {
@@ -2483,6 +2581,65 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2501,6 +2658,18 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
       sale: '',
       special: '',
       discount: '',
+      styles: [],
+      style: '',
+      types: [],
+      type: '',
+      productions: [],
+      production: '',
+      surfaces: [],
+      surface: '',
+      manufacturers: [],
+      manufacturer: '',
+      constructs: [],
+      construct: '',
       modal_bg: false,
       modal_add_new_color: false,
       new_color_name: '',
@@ -2568,46 +2737,72 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
     };
   },
   created: function created() {
+    var _this = this;
+
+    axios.get('/api/styles').then(function (response) {
+      return _this.styles = response.data;
+    });
+    axios.get('/api/types').then(function (response) {
+      return _this.types = response.data;
+    });
+    axios.get('/api/manufacturers').then(function (response) {
+      return _this.manufacturers = response.data;
+    });
+    axios.get('/api/constructs').then(function (response) {
+      return _this.constructs = response.data;
+    });
+    axios.get('/api/surfaces').then(function (response) {
+      return _this.surfaces = response.data;
+    });
+    axios.get('/api/productions').then(function (response) {
+      return _this.productions = response.data;
+    });
     this.getProductInfo();
   },
   methods: {
     getProductInfo: function getProductInfo() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get("/api/product/".concat(this.$route.params.id)).then(function (response) {
-        _this.product = response.data;
-        _this.name = response.data.name;
-        _this.base_price = response.data.base_price;
-        _this.old_price = response.data.old_price;
-        _this.description = response.data.description;
+        _this2.product = response.data;
+        _this2.name = response.data.name;
+        _this2.base_price = response.data.base_price;
+        _this2.old_price = response.data.old_price;
+        _this2.description = response.data.description;
+        _this2.style = response.data.styles[0].id;
+        _this2.type = response.data.types[0].id;
+        _this2.manufacturer = response.data.manufacturers[0].id;
+        _this2.surface = response.data.surfaces[0].id;
+        _this2.production = response.data.productions[0].id;
+        _this2.construct = response.data.constructs[0].id;
 
         if (response.data.hit == 1) {
-          _this.hit = true;
+          _this2.hit = true;
         } else {
-          _this.hit = false;
+          _this2.hit = false;
         }
 
         if (response.data.sale == 1) {
-          _this.sale = true;
+          _this2.sale = true;
         } else {
-          _this.sale = false;
+          _this2.sale = false;
         }
 
         if (response.data.special == 1) {
-          _this.special = true;
+          _this2.special = true;
         } else {
-          _this.special = false;
+          _this2.special = false;
         }
 
         if (response.data.discount == 1) {
-          _this.discount = true;
+          _this2.discount = true;
         } else {
-          _this.discount = false;
+          _this2.discount = false;
         }
       });
     },
     saveProduct: function saveProduct($id) {
-      var _this2 = this;
+      var _this3 = this;
 
       if (this.name.length > 0 && this.base_price.length > 0) {
         axios.post("/api/product/".concat($id, "/update"), {
@@ -2618,9 +2813,15 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
           hit: this.hit,
           special: this.special,
           sale: this.sale,
-          discount: this.discount
+          discount: this.discount,
+          manufacturer: this.manufacturer,
+          surface: this.surface,
+          production: this.production,
+          type: this.type,
+          construct: this.construct,
+          style: this.style
         }).then(function (response) {
-          return _this2.$router.push({
+          return _this3.$router.push({
             name: 'Products'
           });
         })["catch"](function (error) {
@@ -2636,7 +2837,7 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
       }
     },
     saveColor: function saveColor($id) {
-      var _this3 = this;
+      var _this4 = this;
 
       this.new_color_image = document.getElementsByName("new_color_image")[0].value;
 
@@ -2646,7 +2847,7 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
           color_price: this.new_color_price,
           color_image: this.new_color_image
         }).then(function (response) {
-          return _this3.getProductInfo(), _this3.close_add_color_modal();
+          return _this4.getProductInfo(), _this4.close_add_color_modal();
         })["catch"](function (error) {
           if (error.response) {
             for (var key in error.response.data.errors) {
@@ -2660,12 +2861,12 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
       }
     },
     EditColor: function EditColor(id) {
-      var _this4 = this;
+      var _this5 = this;
 
       this.modal_edit_color = true;
       this.modal_bg = true;
       axios.get("/api/color/".concat(id)).then(function (response) {
-        return _this4.edit_color_name = response.data.name, _this4.edit_color_price = response.data.price, _this4.color_filepond_files_edit = [{
+        return _this5.edit_color_name = response.data.name, _this5.edit_color_price = response.data.price, _this5.color_filepond_files_edit = [{
           source: response.data.image,
           options: {
             type: 'local'
@@ -2674,7 +2875,7 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
       });
     },
     updateColor: function updateColor(id) {
-      var _this5 = this;
+      var _this6 = this;
 
       this.edit_color_image = document.getElementsByName("edit_color_image")[0].value;
 
@@ -2684,7 +2885,7 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
           color_price: this.edit_color_price,
           color_image: this.edit_color_image
         }).then(function (response) {
-          return _this5.getProductInfo(), _this5.close_edit_color_modal();
+          return _this6.getProductInfo(), _this6.close_edit_color_modal();
         })["catch"](function (error) {
           if (error.response) {
             for (var key in error.response.data.errors) {
@@ -2698,11 +2899,11 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
       }
     },
     deleteColor: function deleteColor(id) {
-      var _this6 = this;
+      var _this7 = this;
 
       if (confirm("Точно удалить?")) {
         axios.get("/api/color/".concat(id, "/delete")).then(function (response) {
-          return _this6.getProductInfo(), _this6.close_edit_color_modal();
+          return _this7.getProductInfo(), _this7.close_edit_color_modal();
         });
       }
     },
@@ -2713,14 +2914,14 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
       this.modal_edit_color = false, this.modal_bg = false, this.edit_color_name = '', this.edit_color_price = '', this.edit_color_image = '', this.color_filepond_files_edit = [];
     },
     saveSize: function saveSize($id) {
-      var _this7 = this;
+      var _this8 = this;
 
       if (this.new_size_name.length) {
         axios.post("/api/product/".concat($id, "/add_size"), {
           size_name: this.new_size_name,
           size_price: this.new_size_price
         }).then(function (response) {
-          return _this7.getProductInfo(), _this7.close_add_size_modal();
+          return _this8.getProductInfo(), _this8.close_add_size_modal();
         })["catch"](function (error) {
           if (error.response) {
             for (var key in error.response.data.errors) {
@@ -2734,23 +2935,23 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
       }
     },
     EditSize: function EditSize(id) {
-      var _this8 = this;
+      var _this9 = this;
 
       this.modal_edit_size = true;
       this.modal_bg = true;
       axios.get("/api/size/".concat(id)).then(function (response) {
-        return _this8.edit_size_name = response.data.name, _this8.edit_size_price = response.data.price;
+        return _this9.edit_size_name = response.data.name, _this9.edit_size_price = response.data.price;
       });
     },
     updateSize: function updateSize(id) {
-      var _this9 = this;
+      var _this10 = this;
 
       if (this.edit_size_name.length) {
         axios.post("/api/size/".concat(id, "/update"), {
           size_name: this.edit_size_name,
           size_price: this.edit_size_price
         }).then(function (response) {
-          return _this9.getProductInfo(), _this9.close_edit_size_modal();
+          return _this10.getProductInfo(), _this10.close_edit_size_modal();
         })["catch"](function (error) {
           if (error.response) {
             for (var key in error.response.data.errors) {
@@ -2764,11 +2965,11 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
       }
     },
     deleteSize: function deleteSize(id) {
-      var _this10 = this;
+      var _this11 = this;
 
       if (confirm("Точно удалить?")) {
         axios.get("/api/size/".concat(id, "/delete")).then(function (response) {
-          return _this10.getProductInfo(), _this10.close_edit_size_modal();
+          return _this11.getProductInfo(), _this11.close_edit_size_modal();
         });
       }
     },
@@ -44592,56 +44793,366 @@ var render = function() {
       })
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "mb-3" }, [
-      _c("label", { staticClass: "form-label" }, [_vm._v("Базовая цена")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.base_price,
-            expression: "base_price"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text" },
-        domProps: { value: _vm.base_price },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-6" }, [
+        _c("div", { staticClass: "mb-3" }, [
+          _c("label", { staticClass: "form-label" }, [_vm._v("Базовая цена")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.base_price,
+                expression: "base_price"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text" },
+            domProps: { value: _vm.base_price },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.base_price = $event.target.value
+              }
             }
-            _vm.base_price = $event.target.value
-          }
-        }
-      })
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-6" }, [
+        _c("div", { staticClass: "mb-3" }, [
+          _c("label", { staticClass: "form-label" }, [_vm._v("Старая цена")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.old_price,
+                expression: "old_price"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text" },
+            domProps: { value: _vm.old_price },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.old_price = $event.target.value
+              }
+            }
+          })
+        ])
+      ])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "mb-3" }, [
-      _c("label", { staticClass: "form-label" }, [_vm._v("Старая цена")]),
+      _c("label", { staticClass: "form-label" }, [_vm._v("Стиль")]),
       _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.old_price,
-            expression: "old_price"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text" },
-        domProps: { value: _vm.old_price },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.style,
+              expression: "style"
             }
-            _vm.old_price = $event.target.value
+          ],
+          staticClass: "form-select",
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.style = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
           }
-        }
-      })
+        },
+        _vm._l(_vm.styles, function(stylesItem) {
+          return _c(
+            "option",
+            {
+              key: "stylesItem_" + stylesItem.id,
+              domProps: { value: stylesItem.id }
+            },
+            [
+              _vm._v(
+                "\n                " +
+                  _vm._s(stylesItem.name) +
+                  "\n            "
+              )
+            ]
+          )
+        }),
+        0
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "mb-3" }, [
+      _c("label", { staticClass: "form-label" }, [_vm._v("Тип")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.type,
+              expression: "type"
+            }
+          ],
+          staticClass: "form-select",
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.type = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
+          }
+        },
+        _vm._l(_vm.types, function(typesItem) {
+          return _c(
+            "option",
+            {
+              key: "typesItem_" + typesItem.id,
+              domProps: { value: typesItem.id }
+            },
+            [
+              _vm._v(
+                "\n                " + _vm._s(typesItem.name) + "\n            "
+              )
+            ]
+          )
+        }),
+        0
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "mb-3" }, [
+      _c("label", { staticClass: "form-label" }, [_vm._v("Производитель")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.manufacturer,
+              expression: "manufacturer"
+            }
+          ],
+          staticClass: "form-select",
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.manufacturer = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
+          }
+        },
+        _vm._l(_vm.manufacturers, function(manufacturersItem) {
+          return _c(
+            "option",
+            {
+              key: "manufacturersItem_" + manufacturersItem.id,
+              domProps: { value: manufacturersItem.id }
+            },
+            [
+              _vm._v(
+                "\n                " +
+                  _vm._s(manufacturersItem.name) +
+                  "\n            "
+              )
+            ]
+          )
+        }),
+        0
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "mb-3" }, [
+      _c("label", { staticClass: "form-label" }, [_vm._v("Конструкция")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.construct,
+              expression: "construct"
+            }
+          ],
+          staticClass: "form-select",
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.construct = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
+          }
+        },
+        _vm._l(_vm.constructs, function(constructsItem) {
+          return _c(
+            "option",
+            {
+              key: "constructsItem_" + constructsItem.id,
+              domProps: { value: constructsItem.id }
+            },
+            [
+              _vm._v(
+                "\n                " +
+                  _vm._s(constructsItem.name) +
+                  "\n            "
+              )
+            ]
+          )
+        }),
+        0
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "mb-3" }, [
+      _c("label", { staticClass: "form-label" }, [_vm._v("Покрытие")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.surface,
+              expression: "surface"
+            }
+          ],
+          staticClass: "form-select",
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.surface = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
+          }
+        },
+        _vm._l(_vm.surfaces, function(surfacesItem) {
+          return _c(
+            "option",
+            {
+              key: "surfacesItem_" + surfacesItem.id,
+              domProps: { value: surfacesItem.id }
+            },
+            [
+              _vm._v(
+                "\n                " +
+                  _vm._s(surfacesItem.name) +
+                  "\n            "
+              )
+            ]
+          )
+        }),
+        0
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "mb-3" }, [
+      _c("label", { staticClass: "form-label" }, [_vm._v("Изготовление")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.production,
+              expression: "production"
+            }
+          ],
+          staticClass: "form-select",
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.production = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
+          }
+        },
+        _vm._l(_vm.productions, function(productionsItem) {
+          return _c(
+            "option",
+            {
+              key: "productionsItem_" + productionsItem.id,
+              domProps: { value: productionsItem.id }
+            },
+            [
+              _vm._v(
+                "\n                " +
+                  _vm._s(productionsItem.name) +
+                  "\n            "
+              )
+            ]
+          )
+        }),
+        0
+      )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "mb-3" }, [
@@ -44740,60 +45251,378 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "mb-3" }, [
-              _c("label", { staticClass: "form-label" }, [
-                _vm._v("Базовая цена")
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-6" }, [
+                _c("div", { staticClass: "mb-3" }, [
+                  _c("label", { staticClass: "form-label" }, [
+                    _vm._v("Базовая цена")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.base_price,
+                        expression: "base_price"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.base_price },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.base_price = $event.target.value
+                      }
+                    }
+                  })
+                ])
               ]),
               _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.base_price,
-                    expression: "base_price"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text" },
-                domProps: { value: _vm.base_price },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+              _c("div", { staticClass: "col-6" }, [
+                _c("div", { staticClass: "mb-3" }, [
+                  _c("label", { staticClass: "form-label" }, [
+                    _vm._v("Старая цена")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.old_price,
+                        expression: "old_price"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.old_price },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.old_price = $event.target.value
+                      }
                     }
-                    _vm.base_price = $event.target.value
+                  })
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "mb-3" }, [
+              _c("label", { staticClass: "form-label" }, [_vm._v("Стиль")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.style,
+                      expression: "style"
+                    }
+                  ],
+                  staticClass: "form-select",
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.style = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
                   }
-                }
-              })
+                },
+                _vm._l(_vm.styles, function(stylesItem) {
+                  return _c(
+                    "option",
+                    {
+                      key: "stylesItem_" + stylesItem.id,
+                      domProps: { value: stylesItem.id }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(stylesItem.name) +
+                          "\n                            "
+                      )
+                    ]
+                  )
+                }),
+                0
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "mb-3" }, [
+              _c("label", { staticClass: "form-label" }, [_vm._v("Тип")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.type,
+                      expression: "type"
+                    }
+                  ],
+                  staticClass: "form-select",
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.type = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                _vm._l(_vm.types, function(typesItem) {
+                  return _c(
+                    "option",
+                    {
+                      key: "typesItem_" + typesItem.id,
+                      domProps: { value: typesItem.id }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(typesItem.name) +
+                          "\n                            "
+                      )
+                    ]
+                  )
+                }),
+                0
+              )
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "mb-3" }, [
               _c("label", { staticClass: "form-label" }, [
-                _vm._v("Старая цена")
+                _vm._v("Конструкция")
               ]),
               _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.old_price,
-                    expression: "old_price"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text" },
-                domProps: { value: _vm.old_price },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.construct,
+                      expression: "construct"
                     }
-                    _vm.old_price = $event.target.value
+                  ],
+                  staticClass: "form-select",
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.construct = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
                   }
-                }
-              })
+                },
+                _vm._l(_vm.constructs, function(constructsItem) {
+                  return _c(
+                    "option",
+                    {
+                      key: "constructsItem_" + constructsItem.id,
+                      domProps: { value: constructsItem.id }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(constructsItem.name) +
+                          "\n                            "
+                      )
+                    ]
+                  )
+                }),
+                0
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "mb-3" }, [
+              _c("label", { staticClass: "form-label" }, [
+                _vm._v("Производитель")
+              ]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.manufacturer,
+                      expression: "manufacturer"
+                    }
+                  ],
+                  staticClass: "form-select",
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.manufacturer = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                _vm._l(_vm.manufacturers, function(manufacturersItem) {
+                  return _c(
+                    "option",
+                    {
+                      key: "manufacturersItem_" + manufacturersItem.id,
+                      domProps: { value: manufacturersItem.id }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(manufacturersItem.name) +
+                          "\n                            "
+                      )
+                    ]
+                  )
+                }),
+                0
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "mb-3" }, [
+              _c("label", { staticClass: "form-label" }, [_vm._v("Покрытие")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.surface,
+                      expression: "surface"
+                    }
+                  ],
+                  staticClass: "form-select",
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.surface = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                _vm._l(_vm.surfaces, function(surfacesItem) {
+                  return _c(
+                    "option",
+                    {
+                      key: "surfacesItem_" + surfacesItem.id,
+                      domProps: { value: surfacesItem.id }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(surfacesItem.name) +
+                          "\n                            "
+                      )
+                    ]
+                  )
+                }),
+                0
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "mb-3" }, [
+              _c("label", { staticClass: "form-label" }, [
+                _vm._v("Изготовление")
+              ]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.production,
+                      expression: "production"
+                    }
+                  ],
+                  staticClass: "form-select",
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.production = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                _vm._l(_vm.productions, function(productionsItem) {
+                  return _c(
+                    "option",
+                    {
+                      key: "productionsItem_" + productionsItem.id,
+                      domProps: { value: productionsItem.id }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(productionsItem.name) +
+                          "\n                            "
+                      )
+                    ]
+                  )
+                }),
+                0
+              )
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "mb-3" }, [

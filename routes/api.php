@@ -19,6 +19,14 @@ Route::get('size/{id}','App\Http\Controllers\ProductController@size_item');
 Route::post('size/{id}/update','App\Http\Controllers\ProductController@update_size');
 Route::get('size/{id}/delete','App\Http\Controllers\ProductController@delete_size');
 
+Route::get('sizes','App\Http\Controllers\ProductController@sizes_index');
+Route::get('styles','App\Http\Controllers\ProductController@styles_index');
+Route::get('manufacturers','App\Http\Controllers\ProductController@manufacturers_index');
+Route::get('surfaces','App\Http\Controllers\ProductController@surfaces_index');
+Route::get('productions','App\Http\Controllers\ProductController@productions_index');
+Route::get('types','App\Http\Controllers\ProductController@types_index');
+Route::get('constructs','App\Http\Controllers\ProductController@constructs_index');
+
 Route::post('upload','App\Http\Controllers\UploadController@store');
 Route::delete('upload','App\Http\Controllers\UploadController@delete');
 

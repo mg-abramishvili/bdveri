@@ -25,4 +25,34 @@ class Product extends Model
     {
         return $this->belongsToMany('App\Models\Size');
     }
+
+    public function constructs()
+    {
+        return $this->belongsToMany('App\Models\Construct');
+    }
+
+    public function manufacturers()
+    {
+        return $this->belongsToMany('App\Models\Manufacturer');
+    }
+
+    public function types()
+    {
+        return $this->belongsToMany('App\Models\Type');
+    }
+
+    public function styles()
+    {
+        return $this->belongsToMany('App\Models\Style');
+    }
+
+    public function productions()
+    {
+        return $this->belongsToMany('App\Models\Production');
+    }
+
+    public function surfaces()
+    {
+        return $this->belongsToMany('App\Models\Surface');
+    }
 }

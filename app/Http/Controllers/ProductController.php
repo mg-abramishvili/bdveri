@@ -5,6 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Color;
 use App\Models\Size;
+use App\Models\Style;
+use App\Models\Type;
+use App\Models\Manufacturer;
+use App\Models\Production;
+use App\Models\Surface;
+use App\Models\Construct;
 use App\Models\TemporaryFile;
 use Illuminate\Http\Request;
 use Illuminate\Http\File;
@@ -19,7 +25,7 @@ class ProductController extends Controller
 
     public function product_item($id)
     {
-        return Product::with('colors', 'sizes')->find($id);
+        return Product::with('colors', 'sizes', 'styles', 'types', 'manufacturers', 'surfaces', 'productions', 'constructs')->find($id);
     }
 
     public function products_store(Request $request)
@@ -38,6 +44,12 @@ class ProductController extends Controller
         $product->old_price = $data['old_price'];
         $product->description = $data['description'];
         $product->save();
+        $product->constructs()->attach($request->construct, ['product_id' => $product->id]);
+        $product->manufacturers()->attach($request->manufacturer, ['product_id' => $product->id]);
+        $product->productions()->attach($request->production, ['product_id' => $product->id]);
+        $product->styles()->attach($request->style, ['product_id' => $product->id]);
+        $product->surfaces()->attach($request->surface, ['product_id' => $product->id]);
+        $product->types()->attach($request->type, ['product_id' => $product->id]);
     }
 
     public function product_update($id, Request $request)
@@ -59,6 +71,18 @@ class ProductController extends Controller
         $product->discount = $data['discount'];
         $product->sale = $data['sale'];
         $product->special = $data['special'];
+        $product->constructs()->detach();
+        $product->constructs()->attach($request->construct, ['product_id' => $product->id]);
+        $product->manufacturers()->detach();
+        $product->manufacturers()->attach($request->manufacturer, ['product_id' => $product->id]);
+        $product->productions()->detach();
+        $product->productions()->attach($request->production, ['product_id' => $product->id]);
+        $product->styles()->detach();
+        $product->styles()->attach($request->style, ['product_id' => $product->id]);
+        $product->surfaces()->detach();
+        $product->surfaces()->attach($request->surface, ['product_id' => $product->id]);
+        $product->types()->detach();
+        $product->types()->attach($request->type, ['product_id' => $product->id]);
         $product->save();
     }
 
@@ -174,6 +198,41 @@ class ProductController extends Controller
         $size = Size::find($id);
         $size->products()->detach();
         $size->delete();
+    }
+
+    public function styles_index()
+    {
+        return Style::all();
+    }
+
+    public function sizes_index()
+    {
+        return Size::all();
+    }
+
+    public function manufacturers_index()
+    {
+        return Manufacturer::all();
+    }
+
+    public function surfaces_index()
+    {
+        return Surface::all();
+    }
+
+    public function types_index()
+    {
+        return Type::all();
+    }
+
+    public function productions_index()
+    {
+        return Production::all();
+    }
+
+    public function constructs_index()
+    {
+        return Construct::all();
     }
 
 }
