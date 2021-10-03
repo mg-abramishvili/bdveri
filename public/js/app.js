@@ -2640,6 +2640,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -46300,27 +46306,57 @@ var render = function() {
                             _vm._v("Размер")
                           ]),
                           _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.new_size_name,
-                                expression: "new_size_name"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: { type: "text" },
-                            domProps: { value: _vm.new_size_name },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.new_size_name,
+                                  expression: "new_size_name"
                                 }
-                                _vm.new_size_name = $event.target.value
+                              ],
+                              staticClass: "form-select",
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.new_size_name = $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                }
                               }
-                            }
-                          })
+                            },
+                            [
+                              _c("option", { attrs: { value: "600×2000" } }, [
+                                _vm._v("600×2000")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "700×2000" } }, [
+                                _vm._v("700×2000")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "800×2000" } }, [
+                                _vm._v("800×2000")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "900×2000" } }, [
+                                _vm._v("900×2000")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "нестандарт" } }, [
+                                _vm._v("нестандарт")
+                              ])
+                            ]
+                          )
                         ]),
                         _vm._v(" "),
                         _c(

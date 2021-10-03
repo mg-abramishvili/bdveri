@@ -11,7 +11,6 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             StyleSeeder::class,
-            SizeSeeder::class,
             ConstructSeeder::class,
             ManufacturerSeeder::class,
             SurfaceSeeder::class,

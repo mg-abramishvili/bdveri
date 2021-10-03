@@ -247,7 +247,13 @@
                                     <div class="modal-body">
                                         <div class="mb-3">
                                             <label class="form-label">Размер</label>
-                                            <input v-model="new_size_name" type="text" class="form-control">
+                                            <select v-model="new_size_name" class="form-select">
+                                                <option value="600×2000">600×2000</option>
+                                                <option value="700×2000">700×2000</option>
+                                                <option value="800×2000">800×2000</option>
+                                                <option value="900×2000">900×2000</option>
+                                                <option value="нестандарт">нестандарт</option>
+                                            </select>
                                         </div>
                                         <button @click="saveSize(product.id)" class="btn btn-primary">Добавить размер</button>
                                     </div>
