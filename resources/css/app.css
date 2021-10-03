@@ -153,4 +153,21 @@ html, body {
     font-size: 40px;
     font-weight: 700;
 }
+.stickers {
+    position: absolute;
+    left: 30px;
+    top: 0;
+    z-index: 10;
+}
+.sticker {
+    width: 60px;
+    height: 60px;
+    font-size: 9px;
+    border-radius: 100%;
+    line-height: 60px;
+    text-align: center;
+    background-color: rgb(247, 92, 92);
+    color: #fff;
+    margin-bottom: 5px;
+}
 /* Product Item */

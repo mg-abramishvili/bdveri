@@ -26,6 +26,23 @@
                             <textarea v-model="description" rows="5" class="form-control"></textarea>
                         </div>
 
+                        <div class="form-check form-switch mb-1">
+                            <input v-model="hit" class="form-check-input" type="checkbox" id="hit_input">
+                            <label class="form-check-label" for="hit_input">Хит</label>
+                        </div>
+                        <div class="form-check form-switch mb-1">
+                            <input v-model="special" class="form-check-input" type="checkbox" id="special_input">
+                            <label class="form-check-label" for="special_input">Акция</label>
+                        </div>
+                        <div class="form-check form-switch mb-1">
+                            <input v-model="sale" class="form-check-input" type="checkbox" id="sale_input">
+                            <label class="form-check-label" for="sale_input">Распродажа</label>
+                        </div>
+                        <div class="form-check form-switch mb-3">
+                            <input v-model="discount" class="form-check-input" type="checkbox" id="discount_input">
+                            <label class="form-check-label" for="discount_input">Скидка</label>
+                        </div>
+
                         <button @click="saveProduct(product.id)" class="btn btn-primary">Сохранить</button>
                     </div>
                 </div>
@@ -237,6 +254,10 @@
                 base_price: '',
                 old_price: '',
                 description: '',
+                hit: '',
+                sale: '',
+                special: '',
+                discount: '',
 
                 modal_bg: false,
 
@@ -314,18 +335,24 @@
             getProductInfo() {
                 axios
                 .get(`/api/product/${this.$route.params.id}`)
-                .then(response => (
-                    this.product = response.data,
-                    this.name = response.data.name,
-                    this.base_price = response.data.base_price,
-                    this.old_price = response.data.old_price,
+                .then((response => {
+                    this.product = response.data
+                    this.name = response.data.name
+                    this.base_price = response.data.base_price
+                    this.old_price = response.data.old_price
                     this.description = response.data.description
-                ));
+
+                    if(response.data.hit == 1) { this.hit = true } else { this.hit = false }
+                    if(response.data.sale == 1) { this.sale = true } else { this.sale = false }
+                    if(response.data.special == 1) { this.special = true } else { this.special = false }
+                    if(response.data.discount == 1) { this.discount = true } else { this.discount = false }
+                    
+                }));
             },
             saveProduct($id) {
                 if(this.name.length > 0 && this.base_price.length > 0) {
                     axios
-                    .post(`/api/product/${$id}/update`, { name: this.name, base_price: this.base_price, old_price: this.old_price, description: this.description })
+                    .post(`/api/product/${$id}/update`, { name: this.name, base_price: this.base_price, old_price: this.old_price, description: this.description, hit: this.hit, special: this.special, sale: this.sale, discount: this.discount })
                     .then(response => (
                         this.$router.push({name: 'Products' })
                     ))

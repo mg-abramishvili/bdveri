@@ -55,6 +55,10 @@ class ProductController extends Controller
         $product->base_price = $data['base_price'];
         $product->old_price = $data['old_price'];
         $product->description = $data['description'];
+        $product->hit = $data['hit'];
+        $product->discount = $data['discount'];
+        $product->sale = $data['sale'];
+        $product->special = $data['special'];
         $product->save();
     }
 

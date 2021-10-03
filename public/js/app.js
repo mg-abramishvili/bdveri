@@ -2466,6 +2466,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2480,6 +2497,10 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
       base_price: '',
       old_price: '',
       description: '',
+      hit: '',
+      sale: '',
+      special: '',
+      discount: '',
       modal_bg: false,
       modal_add_new_color: false,
       new_color_name: '',
@@ -2554,7 +2575,35 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
       var _this = this;
 
       axios.get("/api/product/".concat(this.$route.params.id)).then(function (response) {
-        return _this.product = response.data, _this.name = response.data.name, _this.base_price = response.data.base_price, _this.old_price = response.data.old_price, _this.description = response.data.description;
+        _this.product = response.data;
+        _this.name = response.data.name;
+        _this.base_price = response.data.base_price;
+        _this.old_price = response.data.old_price;
+        _this.description = response.data.description;
+
+        if (response.data.hit == 1) {
+          _this.hit = true;
+        } else {
+          _this.hit = false;
+        }
+
+        if (response.data.sale == 1) {
+          _this.sale = true;
+        } else {
+          _this.sale = false;
+        }
+
+        if (response.data.special == 1) {
+          _this.special = true;
+        } else {
+          _this.special = false;
+        }
+
+        if (response.data.discount == 1) {
+          _this.discount = true;
+        } else {
+          _this.discount = false;
+        }
       });
     },
     saveProduct: function saveProduct($id) {
@@ -2565,7 +2614,11 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
           name: this.name,
           base_price: this.base_price,
           old_price: this.old_price,
-          description: this.description
+          description: this.description,
+          hit: this.hit,
+          special: this.special,
+          sale: this.sale,
+          discount: this.discount
         }).then(function (response) {
           return _this2.$router.push({
             name: 'Products'
@@ -2953,6 +3006,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var hooper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! hooper */ "./node_modules/hooper/dist/hooper.esm.js");
 /* harmony import */ var hooper_dist_hooper_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! hooper/dist/hooper.css */ "./node_modules/hooper/dist/hooper.css");
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -44762,6 +44822,206 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
+            _c("div", { staticClass: "form-check form-switch mb-1" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.hit,
+                    expression: "hit"
+                  }
+                ],
+                staticClass: "form-check-input",
+                attrs: { type: "checkbox", id: "hit_input" },
+                domProps: {
+                  checked: Array.isArray(_vm.hit)
+                    ? _vm._i(_vm.hit, null) > -1
+                    : _vm.hit
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.hit,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = null,
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 && (_vm.hit = $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          (_vm.hit = $$a
+                            .slice(0, $$i)
+                            .concat($$a.slice($$i + 1)))
+                      }
+                    } else {
+                      _vm.hit = $$c
+                    }
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "hit_input" }
+                },
+                [_vm._v("Хит")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check form-switch mb-1" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.special,
+                    expression: "special"
+                  }
+                ],
+                staticClass: "form-check-input",
+                attrs: { type: "checkbox", id: "special_input" },
+                domProps: {
+                  checked: Array.isArray(_vm.special)
+                    ? _vm._i(_vm.special, null) > -1
+                    : _vm.special
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.special,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = null,
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 && (_vm.special = $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          (_vm.special = $$a
+                            .slice(0, $$i)
+                            .concat($$a.slice($$i + 1)))
+                      }
+                    } else {
+                      _vm.special = $$c
+                    }
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "special_input" }
+                },
+                [_vm._v("Акция")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check form-switch mb-1" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.sale,
+                    expression: "sale"
+                  }
+                ],
+                staticClass: "form-check-input",
+                attrs: { type: "checkbox", id: "sale_input" },
+                domProps: {
+                  checked: Array.isArray(_vm.sale)
+                    ? _vm._i(_vm.sale, null) > -1
+                    : _vm.sale
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.sale,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = null,
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 && (_vm.sale = $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          (_vm.sale = $$a
+                            .slice(0, $$i)
+                            .concat($$a.slice($$i + 1)))
+                      }
+                    } else {
+                      _vm.sale = $$c
+                    }
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "sale_input" }
+                },
+                [_vm._v("Распродажа")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check form-switch mb-3" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.discount,
+                    expression: "discount"
+                  }
+                ],
+                staticClass: "form-check-input",
+                attrs: { type: "checkbox", id: "discount_input" },
+                domProps: {
+                  checked: Array.isArray(_vm.discount)
+                    ? _vm._i(_vm.discount, null) > -1
+                    : _vm.discount
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.discount,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = null,
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 && (_vm.discount = $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          (_vm.discount = $$a
+                            .slice(0, $$i)
+                            .concat($$a.slice($$i + 1)))
+                      }
+                    } else {
+                      _vm.discount = $$c
+                    }
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "discount_input" }
+                },
+                [_vm._v("Скидка")]
+              )
+            ]),
+            _vm._v(" "),
             _c(
               "button",
               {
@@ -45874,6 +46134,32 @@ var render = function() {
           "div",
           { staticClass: "ProductColorHooper_wrapper" },
           [
+            _c("div", { staticClass: "stickers" }, [
+              _vm.product.hit == true
+                ? _c("div", { staticClass: "sticker sticker_hit" }, [
+                    _vm._v("Хит")
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.product.special == true
+                ? _c("div", { staticClass: "sticker sticker_special" }, [
+                    _vm._v("Акция")
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.product.sale == true
+                ? _c("div", { staticClass: "sticker sticker_sale" }, [
+                    _vm._v("Распродажа")
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.product.discount == true
+                ? _c("div", { staticClass: "sticker sticker_discount" }, [
+                    _vm._v("Скидка")
+                  ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
             _c("button", {
               staticClass: "hooper_nav_button hooper_nav_button_prev",
               on: {

@@ -4,6 +4,13 @@
         <div class="row">
             <div class="col-12 col-md-4">
                 <div class="ProductColorHooper_wrapper">
+                    <div class="stickers">
+                        <div v-if="product.hit == true" class="sticker sticker_hit">Хит</div>
+                        <div v-if="product.special == true" class="sticker sticker_special">Акция</div>
+                        <div v-if="product.sale == true" class="sticker sticker_sale">Распродажа</div>
+                        <div v-if="product.discount == true" class="sticker sticker_discount">Скидка</div>
+                    </div>
+
                     <button @click.prevent="slidePrev" class="hooper_nav_button hooper_nav_button_prev"></button>
                     <button @click.prevent="slideNext" class="hooper_nav_button hooper_nav_button_next"></button>
 

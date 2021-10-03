@@ -14,6 +14,10 @@ class CreateProductsTable extends Migration
             $table->longText('description')->nullable();
             $table->decimal('base_price')->default('0');
             $table->decimal('old_price')->nullable();
+            $table->boolean('hit')->nullable();
+            $table->boolean('discount')->nullable();
+            $table->boolean('sale')->nullable();
+            $table->boolean('special')->nullable();
             $table->timestamps();
         });
     }
