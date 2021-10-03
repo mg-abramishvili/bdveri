@@ -3350,6 +3350,56 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -47348,9 +47398,119 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-12" }, [
-        _vm._v(
-          "\n            " + _vm._s(_vm.product.description) + "\n        "
-        )
+        _c("div", { staticClass: "description" }, [
+          _vm._v(
+            "\n                " +
+              _vm._s(_vm.product.description) +
+              "\n            "
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("table", { staticClass: "table table-striped table-description" }, [
+        _c("tbody", [
+          _c("tr", [
+            _c("td", [_vm._v("Производитель")]),
+            _vm._v(" "),
+            _c(
+              "td",
+              [
+                _vm._l(_vm.product.manufacturers, function(manufacturer) {
+                  return [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(manufacturer.name) +
+                        "\n                        "
+                    )
+                  ]
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Стиль")]),
+            _vm._v(" "),
+            _c(
+              "td",
+              [
+                _vm._l(_vm.product.styles, function(style) {
+                  return [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(style.name) +
+                        "\n                        "
+                    )
+                  ]
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Тип")]),
+            _vm._v(" "),
+            _c(
+              "td",
+              [
+                _vm._l(_vm.product.types, function(type) {
+                  return [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(type.name) +
+                        "\n                        "
+                    )
+                  ]
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Конструкция")]),
+            _vm._v(" "),
+            _c(
+              "td",
+              [
+                _vm._l(_vm.product.constructs, function(construct) {
+                  return [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(construct.name) +
+                        "\n                        "
+                    )
+                  ]
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Покрытие")]),
+            _vm._v(" "),
+            _c(
+              "td",
+              [
+                _vm._l(_vm.product.surfaces, function(surface) {
+                  return [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(surface.name) +
+                        "\n                        "
+                    )
+                  ]
+                })
+              ],
+              2
+            )
+          ])
+        ])
       ])
     ]),
     _vm._v(" "),

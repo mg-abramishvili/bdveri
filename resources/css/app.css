@@ -170,4 +170,14 @@ html, body {
     color: #fff;
     margin-bottom: 5px;
 }
+.description {
+    font-size: 18px;
+    margin: 50px 0;
+}
+.table-description {
+    margin-bottom: 50px;
+}
+.table-description tr td:first-child {
+    font-weight: 700;
+}
 /* Product Item */

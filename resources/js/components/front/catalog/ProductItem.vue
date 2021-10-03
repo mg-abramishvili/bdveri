@@ -128,9 +128,59 @@
 
         <div class="row">
             <div class="col-12">
-                {{ product.description }}
+                <div class="description">
+                    {{ product.description }}
+                </div>
             </div>
         </div>
+
+        <div class="row">
+            <table class="table table-striped table-description">
+                <tbody>
+                    <tr>
+                        <td>Производитель</td>
+                        <td>
+                            <template v-for="manufacturer in product.manufacturers">
+                                {{ manufacturer.name }}
+                            </template>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Стиль</td>
+                        <td>
+                            <template v-for="style in product.styles">
+                                {{ style.name }}
+                            </template>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Тип</td>
+                        <td>
+                            <template v-for="type in product.types">
+                                {{ type.name }}
+                            </template>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Конструкция</td>
+                        <td>
+                            <template v-for="construct in product.constructs">
+                                {{ construct.name }}
+                            </template>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Покрытие</td>
+                        <td>
+                            <template v-for="surface in product.surfaces">
+                                {{ surface.name }}
+                            </template>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
         <div v-if="modal_bg" class="modal-backdrop fade show"></div>
     </div>
 </template>
