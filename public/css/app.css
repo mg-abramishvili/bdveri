@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&display=swap);
 @charset "UTF-8";/*!
  * Bootstrap v5.1.1 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
@@ -99,6 +99,9 @@ html, body {
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
+.product-item-page h1 {
+    font-weight: 400;
+}
 .product-info-buttons button {
     box-shadow: none;
     text-align: center;
@@ -107,6 +110,7 @@ html, body {
     border: 1px solid #ddd;
     width: 100%;
     border-radius: 5px;
+    margin-bottom: 15px;
 }
 .product-info-buttons img {
     width: 25px;
@@ -136,6 +140,7 @@ html, body {
 .product-sizes-list li {
     display: inline-block;
     margin-right: 5px;
+    margin-bottom: 5px;
 }
 .product-color-button,
 .product-size-button {
@@ -153,9 +158,25 @@ html, body {
     border-color: #bea67c;
 }
 .product-item-page .price {
-    color: #bea67c;
-    font-size: 40px;
-    font-weight: 700;
+    color: #222;
+    font-size: 50px;
+    line-height: 1;
+}
+.product-item-page .price del {
+    font-size: 28px;
+    color: #5d5d64;
+    font-weight: 300;
+    text-decoration: none;
+    position: relative;
+}
+.product-item-page .price del:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #5d5d64;
 }
 .stickers {
     position: absolute;
@@ -176,7 +197,8 @@ html, body {
 }
 .description {
     font-size: 18px;
-    margin: 50px 0;
+    margin-top: 70px;
+    margin-bottom: 50px;
 }
 .table-description {
     margin-bottom: 50px;
@@ -238,5 +260,13 @@ html, body {
     display: inline-block;
     vertical-align: middle;
     color: #999;
+    margin-left: 5px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 2px;
+}
+.color_size_label {
+    color: #999;
+    font-size: 15px;
+    margin-bottom: 5px;
 }
 /* Product Item */

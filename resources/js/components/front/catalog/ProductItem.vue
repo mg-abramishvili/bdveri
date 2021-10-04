@@ -21,118 +21,134 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-8">
-                    <h1 class="mt-0 mb-2">{{ product.name }}</h1>
+                    <div class="row">
+                        <div class="col-12 col-md-9">
+                            <h1 class="mt-0 mb-0">{{ product.name }}</h1>
 
-                    <div class="rating mb-4">
-                        <div class="star star-full"></div>
-                        <div class="star star-full"></div>
-                        <div class="star star-full"></div>
-                        <div class="star star-full"></div>
-                        <div class="star star-half"></div>
-                        <div class="score">11</div>
+                            <div class="rating mb-2">
+                                <div class="star star-full"></div>
+                                <div class="star star-full"></div>
+                                <div class="star star-full"></div>
+                                <div class="star star-full"></div>
+                                <div class="star star-half"></div>
+                                <div class="score">11 отзывов</div>
+                            </div>
+
+                            <div class="row align-items-center mb-2">
+                                <div class="col-12 col-md-12">
+                                    <span class="color_size_label">Цвет:</span>
+                                </div>
+                                <div class="col-12 col-md-12">
+                                    <ul class="product-colors-list">
+                                        <li v-for="(color, index) in product.colors" :key="'product_color_' + color.id">
+                                            <button @click="chooseColor(index, color.id, color.name, color.price)" :id="'product_color_' + color.id" class="product-color-button">
+                                                {{ color.name }}
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="row align-items-center">
+                                <div class="col-12 col-md-12">
+                                    <span class="color_size_label">Размер:</span>
+                                </div>
+                                <div class="col-12 col-md-12">
+                                    <ul class="product-sizes-list">
+                                        <li v-for="(size, index) in product.sizes" :key="'product_size_' + size.id">
+                                            <button @click="chooseSize(index, size.id, size.name, size.price)" :id="'product_size_' + size.id" class="product-size-button">
+                                                {{ size.name }}
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="price my-2">
+                                <del v-if="product.old_price">{{ product.old_price }} <i style="font-style: normal; color: #b3b3b7; font-weight: 400;">₽</i></del><br/>
+                                {{ price }} <i style="font-style: normal; color: #b3b3b7; font-weight: 400;">₽</i>
+                            </div>
+
+                            <button class="btn-standard">В корзину</button>
+                        </div>
+
+                        <div class="col-12 col-md-3">
+                            <div class="product-info-buttons">
+                                <button @click="open_gdekupit_modal()">
+                                    <img src="/img/ico-location.svg" />
+                                    <span>Где купить?</span>
+                                </button>
+                                <div v-if="modal_gdekupit" class="modal" tabindex="-1">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Где купить?</h5>
+                                                <button @click="close_gdekupit_modal()" type="button" class="btn-close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Где купить текст.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button @click="open_kakoplatit_modal()">
+                                    <img src="/img/ico-card.svg" />
+                                    <span>Как оплатить?</span>
+                                </button>
+                                <div v-if="modal_kakoplatit" class="modal" tabindex="-1">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Как оплатить?</h5>
+                                                <button @click="close_kakoplatit_modal()" type="button" class="btn-close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Оплата текст.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    
+                                <button @click="open_zamer_modal()">
+                                    <img src="/img/ico-size.svg" />
+                                    <span>Заказать замер</span>
+                                </button>
+                                <div v-if="modal_zamer" class="modal" tabindex="-1">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Заказать замер</h5>
+                                                <button @click="close_zamer_modal()" type="button" class="btn-close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Замер текст.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    
+                                <button @click="open_zvonok_modal()">
+                                    <img src="/img/ico-alarm.svg" />
+                                    <span>Обратный звонок</span>
+                                </button>
+                                <div v-if="modal_zvonok" class="modal" tabindex="-1">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Обратный звонок</h5>
+                                                <button @click="close_zvonok_modal()" type="button" class="btn-close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Звонок текст.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="row product-info-buttons">
-                        <div class="col-6 col-md-3">
-                            <button @click="open_gdekupit_modal()">
-                                <img src="/img/ico-location.svg" />
-                                <span>Где купить?</span>
-                            </button>
-                            <div v-if="modal_gdekupit" class="modal" tabindex="-1">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Где купить?</h5>
-                                            <button @click="close_gdekupit_modal()" type="button" class="btn-close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Где купить текст.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <button @click="open_kakoplatit_modal()">
-                                <img src="/img/ico-card.svg" />
-                                <span>Как оплатить?</span>
-                            </button>
-                            <div v-if="modal_kakoplatit" class="modal" tabindex="-1">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Как оплатить?</h5>
-                                            <button @click="close_kakoplatit_modal()" type="button" class="btn-close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Оплата текст.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <button @click="open_zamer_modal()">
-                                <img src="/img/ico-size.svg" />
-                                <span>Заказать замер</span>
-                            </button>
-                            <div v-if="modal_zamer" class="modal" tabindex="-1">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Заказать замер</h5>
-                                            <button @click="close_zamer_modal()" type="button" class="btn-close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Замер текст.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <button @click="open_zvonok_modal()">
-                                <img src="/img/ico-alarm.svg" />
-                                <span>Обратный звонок</span>
-                            </button>
-                            <div v-if="modal_zvonok" class="modal" tabindex="-1">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Обратный звонок</h5>
-                                            <button @click="close_zvonok_modal()" type="button" class="btn-close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Звонок текст.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <ul class="product-colors-list mt-4">
-                        <li v-for="(color, index) in product.colors" :key="'product_color_' + color.id">
-                            <button @click="chooseColor(index, color.id, color.name, color.price)" :id="'product_color_' + color.id" class="product-color-button">
-                                {{ color.name }}
-                            </button>
-                        </li>
-                    </ul>
-
-                    <ul class="product-sizes-list mt-4">
-                        <li v-for="(size, index) in product.sizes" :key="'product_size_' + size.id">
-                            <button @click="chooseSize(index, size.id, size.name, size.price)" :id="'product_size_' + size.id" class="product-size-button">
-                                {{ size.name }}
-                            </button>
-                        </li>
-                    </ul>
-
-                    <div class="price my-4">
-                        <del v-if="product.old_price" style="font-weight: normal;">{{ product.old_price }} ₽</del>
-                        {{ price }} ₽
-                    </div>
-
-                    <button class="btn-standard">В корзину</button>
                 </div>
             </div>
         </div>
