@@ -23,15 +23,35 @@
                 <div class="col-12 col-md-8">
                     <div class="row">
                         <div class="col-12 col-md-9">
-                            <h1 class="mt-0 mb-0">{{ product.name }}</h1>
+                            <div class="row align-items-center">
+                                <div class="col-12 col-md-8">
+                                    <h1 class="mt-0 mb-2">{{ product.name }}</h1>
+                                </div>
+                                <div class="col-12 col-md-4 text-end">
+                                    <div class="rating mb-2">
+                                        <div class="star star-full"></div>
+                                        <div class="star star-full"></div>
+                                        <div class="star star-full"></div>
+                                        <div class="star star-full"></div>
+                                        <div class="star star-half"></div>
+                                        <br/><div class="score">11 отзывов</div>
+                                    </div>
+                                </div>
+                            </div>
 
-                            <div class="rating mb-2">
-                                <div class="star star-full"></div>
-                                <div class="star star-full"></div>
-                                <div class="star star-full"></div>
-                                <div class="star star-full"></div>
-                                <div class="star star-half"></div>
-                                <div class="score">11 отзывов</div>
+                            <div class="row align-items-center mb-2">
+                                <div class="col-12 col-md-12">
+                                    <span class="color_size_label">Тип:</span>
+                                </div>
+                                <div class="col-12 col-md-12">
+                                    <ul class="product-types-list">
+                                        <li v-for="(type, index) in product.types" :key="'product_type_' + type.id">
+                                            <button :id="'product_type_' + type.id" class="product-type-button">
+                                                {{ type.name }}
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
 
                             <div class="row align-items-center mb-2">
@@ -64,12 +84,19 @@
                                 </div>
                             </div>
 
-                            <div class="price my-2">
+                            <div class="price mt-1 mb-2">
                                 <del v-if="product.old_price">{{ product.old_price }} <i style="font-style: normal; color: #b3b3b7; font-weight: 400;">₽</i></del><br/>
                                 {{ price }} <i style="font-style: normal; color: #b3b3b7; font-weight: 400;">₽</i>
                             </div>
 
-                            <button class="btn-standard">В корзину</button>
+                            <button class="btn-standard btn-addtocart">В корзину</button>
+
+                            <div class="instock">
+                                <template v-for="production in product.productions">
+                                    <i>срок изготовления:</i><br/>
+                                    {{ production.name }}
+                                </template>
+                            </div>  
                         </div>
 
                         <div class="col-12 col-md-3">

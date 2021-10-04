@@ -17,7 +17,7 @@
                             </li>
                         </ul>
                         <div class="d-flex">
-                            <router-link :to="{name: 'Products'}" class="nav-link">Админка</router-link>
+                            
                         </div>
                     </div>
                 </div>

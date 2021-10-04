@@ -81,10 +81,12 @@ html, body {
 .ProductColorHooper_wrapper .hooper_nav_button_prev {
     background-image: url('/img/hooper_prev.svg');
     left: 0;
+    opacity: 0.6;
 }
 .ProductColorHooper_wrapper .hooper_nav_button_next {
     background-image: url('/img/hooper_next.svg');
     right: 0;
+    opacity: 0.6;
 }
 .ProductColorHooper {
     height: 450px !important;
@@ -127,19 +129,22 @@ html, body {
     margin: 0;
 }
 .product-colors-list,
-.product-sizes-list {
+.product-sizes-list,
+.product-types-list {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 .product-colors-list li,
-.product-sizes-list li {
+.product-sizes-list li,
+.product-types-list li {
     display: inline-block;
     margin-right: 5px;
     margin-bottom: 5px;
 }
 .product-color-button,
-.product-size-button {
+.product-size-button,
+.product-type-button {
     cursor: pointer;
     padding: 8px 12px;
     line-height: 1;
@@ -150,7 +155,8 @@ html, body {
     font-size: 15px;
 }
 .product-color-button_active,
-.product-size-button_active {
+.product-size-button_active,
+.product-type-button_active {
     border-color: #bea67c;
 }
 .product-item-page .price {
@@ -235,6 +241,9 @@ html, body {
     width: 30%;
     color: #5d5d64;
 }
+.rating {
+    line-height: 1.2;
+}
 .rating .star {
     width: 15px;
     height: 15px;
@@ -264,5 +273,23 @@ html, body {
     color: #999;
     font-size: 15px;
     margin-bottom: 5px;
+}
+.instock {
+    display: inline-block;
+    vertical-align: middle;
+    color: #bea67c;
+    font-size: 18px;
+    margin-left: 20px;
+    line-height: 1.2;
+    margin-top: -4px;
+}
+.instock i {
+    font-style: normal;
+    font-size: 15px;
+    color: #999;
+}
+.btn-addtocart {
+    display: inline-block;
+    vertical-align: middle;
 }
 /* Product Item */

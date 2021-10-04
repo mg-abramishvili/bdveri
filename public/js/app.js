@@ -3467,6 +3467,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -46998,21 +47025,7 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "d-flex" },
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "nav-link",
-                          attrs: { to: { name: "Products" } }
-                        },
-                        [_vm._v("Админка")]
-                      )
-                    ],
-                    1
-                  )
+                  _c("div", { staticClass: "d-flex" })
                 ]
               )
             ],
@@ -47200,14 +47213,48 @@ var render = function() {
         _c("div", { staticClass: "col-12 col-md-8" }, [
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-12 col-md-9" }, [
-              _c("h1", { staticClass: "mt-0 mb-0" }, [
-                _vm._v(_vm._s(_vm.product.name))
+              _c("div", { staticClass: "row align-items-center" }, [
+                _c("div", { staticClass: "col-12 col-md-8" }, [
+                  _c("h1", { staticClass: "mt-0 mb-2" }, [
+                    _vm._v(_vm._s(_vm.product.name))
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(0)
               ]),
-              _vm._v(" "),
-              _vm._m(0),
               _vm._v(" "),
               _c("div", { staticClass: "row align-items-center mb-2" }, [
                 _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-12 col-md-12" }, [
+                  _c(
+                    "ul",
+                    { staticClass: "product-types-list" },
+                    _vm._l(_vm.product.types, function(type, index) {
+                      return _c("li", { key: "product_type_" + type.id }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "product-type-button",
+                            attrs: { id: "product_type_" + type.id }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                            " +
+                                _vm._s(type.name) +
+                                "\n                                        "
+                            )
+                          ]
+                        )
+                      ])
+                    }),
+                    0
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row align-items-center mb-2" }, [
+                _vm._m(2),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-12 col-md-12" }, [
                   _c(
@@ -47247,7 +47294,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "row align-items-center" }, [
-                _vm._m(2),
+                _vm._m(3),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-12 col-md-12" }, [
                   _c(
@@ -47286,7 +47333,7 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "price my-2" }, [
+              _c("div", { staticClass: "price mt-1 mb-2" }, [
                 _vm.product.old_price
                   ? _c("del", [
                       _vm._v(_vm._s(_vm.product.old_price) + " "),
@@ -47320,9 +47367,28 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _c("button", { staticClass: "btn-standard" }, [
+              _c("button", { staticClass: "btn-standard btn-addtocart" }, [
                 _vm._v("В корзину")
-              ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "instock" },
+                [
+                  _vm._l(_vm.product.productions, function(production) {
+                    return [
+                      _c("i", [_vm._v("срок изготовления:")]),
+                      _c("br"),
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(production.name) +
+                          "\n                            "
+                      )
+                    ]
+                  })
+                ],
+                2
+              )
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-12 col-md-3" }, [
@@ -47536,7 +47602,7 @@ var render = function() {
     _c("div", { staticClass: "description" }, [
       _c("div", { staticClass: "container" }, [
         _c("div", { staticClass: "row" }, [
-          _vm._m(3),
+          _vm._m(4),
           _vm._v(" "),
           _c("div", { staticClass: "col-12 col-md-8" }, [
             _vm._v(
@@ -47607,7 +47673,7 @@ var render = function() {
           [
             _c("div", { staticClass: "container" }, [
               _c("div", { staticClass: "row" }, [
-                _vm._m(4),
+                _vm._m(5),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-12 col-md-8" }, [
                   _c("table", { staticClass: "table" }, [
@@ -47721,7 +47787,7 @@ var render = function() {
           ]
         ),
         _vm._v(" "),
-        _vm._m(5)
+        _vm._m(6)
       ])
     ]),
     _vm._v(" "),
@@ -47735,18 +47801,29 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "rating mb-2" }, [
-      _c("div", { staticClass: "star star-full" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "star star-full" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "star star-full" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "star star-full" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "star star-half" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "score" }, [_vm._v("11 отзывов")])
+    return _c("div", { staticClass: "col-12 col-md-4 text-end" }, [
+      _c("div", { staticClass: "rating mb-2" }, [
+        _c("div", { staticClass: "star star-full" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "star star-full" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "star star-full" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "star star-full" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "star star-half" }),
+        _vm._v(" "),
+        _c("br"),
+        _c("div", { staticClass: "score" }, [_vm._v("11 отзывов")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 col-md-12" }, [
+      _c("span", { staticClass: "color_size_label" }, [_vm._v("Тип:")])
     ])
   },
   function() {
