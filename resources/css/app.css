@@ -1,9 +1,9 @@
 @import 'bootstrap.min.css';
-@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap');
 
 html, body {
     font-family: 'Jost', sans-serif;
-    font-size: 16px;
+    font-size: 17px;
 }
 
 .filepond--root .filepond--credits {
@@ -177,7 +177,62 @@ html, body {
 .table-description {
     margin-bottom: 50px;
 }
+.table-description .nav-pills .nav-link {
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    padding: 20px 0;
+    margin-right: 15px;
+    line-height: 1;
+    font-size: 19px;
+    color: #333;
+}
+.table-description .nav-pills .nav-link.active {
+    background: none;
+    border-color: #bea67c;
+    font-weight: 500;
+    color: #bea67c;
+}
+.table-description .tab-content {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    border-top: 1px solid #ddd;
+}
+.table-description table {
+    margin-bottom: 0;
+}
+.table-description table tbody,
+.table-description table td,
+.table-description table tfoot,
+.table-description table th,
+.table-description table thead,
+.table-description table tr {
+    border: 0;
+    font-size: 18px;
+}
 .table-description tr td:first-child {
-    font-weight: 700;
+    width: 30%;
+    color: #5d5d64;
+}
+.rating .star {
+    width: 15px;
+    height: 15px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    display: inline-block;
+    vertical-align: middle;
+}
+.rating .star-full {
+    background-image: url('/img/star-full.svg');
+}
+.rating .star-half {
+    background-image: url('/img/star-half.svg');
+}
+.rating .score {
+    font-size: 15px;
+    line-height: 1;
+    display: inline-block;
+    vertical-align: middle;
+    color: #999;
 }
 /* Product Item */

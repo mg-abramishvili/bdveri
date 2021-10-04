@@ -23,7 +23,7 @@
                 </div>
             </nav>
         </header>
-        <div class="container">
+        <div>
             <router-view :key="$route.path"></router-view>
         </div>
     </div>
