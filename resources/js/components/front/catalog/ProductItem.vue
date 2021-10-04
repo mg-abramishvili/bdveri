@@ -85,8 +85,8 @@
                             </div>
 
                             <div class="price mt-1 mb-2">
-                                <del v-if="product.old_price">{{ product.old_price }} <i style="font-style: normal; color: #b3b3b7; font-weight: 400;">₽</i></del><br/>
-                                {{ price }} <i style="font-style: normal; color: #b3b3b7; font-weight: 400;">₽</i>
+                                <del v-if="product.old_price">{{ parseInt(product.old_price).toFixed(0) }} <i style="font-style: normal; color: #b3b3b7; font-weight: 400;">₽</i></del><br/>
+                                {{ parseInt(price).toFixed(0) }} <i style="font-style: normal; color: #b3b3b7; font-weight: 400;">₽</i>
                             </div>
 
                             <button class="btn-standard btn-addtocart">В корзину</button>
