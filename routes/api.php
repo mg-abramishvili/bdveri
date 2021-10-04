@@ -27,6 +27,10 @@ Route::get('productions','App\Http\Controllers\ProductController@productions_ind
 Route::get('types','App\Http\Controllers\ProductController@types_index');
 Route::get('constructs','App\Http\Controllers\ProductController@constructs_index');
 
+Route::get('product/{id}/reviews','App\Http\Controllers\ProductController@product_reviews');
+Route::get('reviews','App\Http\Controllers\ProductController@all_reviews');
+Route::post('product/{id}/add_review','App\Http\Controllers\ProductController@add_review');
+
 Route::post('upload','App\Http\Controllers\UploadController@store');
 Route::delete('upload','App\Http\Controllers\UploadController@delete');
 

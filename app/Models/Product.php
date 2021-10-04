@@ -55,4 +55,9 @@ class Product extends Model
     {
         return $this->belongsToMany('App\Models\Surface');
     }
+
+    public function reviews()
+    {
+        return $this->belongsToMany('App\Models\Review');
+    }
 }

@@ -29,12 +29,48 @@
                                 </div>
                                 <div class="col-12 col-md-4 text-end">
                                     <div class="rating mb-2">
-                                        <div class="star star-full"></div>
-                                        <div class="star star-full"></div>
-                                        <div class="star star-full"></div>
-                                        <div class="star star-full"></div>
-                                        <div class="star star-half"></div>
-                                        <br/><div class="score">11 отзывов</div>
+                                        
+                                        <template v-if="rating <= 1">
+                                            <div class="star star-full"></div><div class="star star-blank"></div><div class="star star-blank"></div><div class="star star-blank"></div><div class="star star-blank"></div>
+                                        </template>
+                                        <template v-if="rating > 1 && rating <= 1.75">
+                                            <div class="star star-full"></div><div class="star star-half"></div><div class="star star-blank"></div><div class="star star-blank"></div><div class="star star-blank"></div>
+                                        </template>
+                                        <template v-if="rating > 1.75 && rating <= 2">
+                                            <div class="star star-full"></div><div class="star star-full"></div><div class="star star-blank"></div><div class="star star-blank"></div><div class="star star-blank"></div>
+                                        </template>
+                                        <template v-if="rating > 2 && rating <= 2.75">
+                                            <div class="star star-full"></div><div class="star star-full"></div><div class="star star-half"></div><div class="star star-blank"></div><div class="star star-blank"></div>
+                                        </template>
+                                        <template v-if="rating > 2.75 && rating <= 3">
+                                            <div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-blank"></div><div class="star star-blank"></div>
+                                        </template>
+                                        <template v-if="rating > 3 && rating <= 3.75">
+                                            <div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-half"></div><div class="star star-blank"></div>
+                                        </template>
+                                        <template v-if="rating > 3.75 && rating <= 4">
+                                            <div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-blank"></div>
+                                        </template>
+                                        <template v-if="rating > 4 && rating <= 4.75">
+                                            <div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-half"></div>
+                                        </template>
+                                        <template v-if="rating > 4.75 && rating <= 5">
+                                            <div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div>
+                                        </template>
+
+                                        <br/>
+                                        <div class="score">
+                                            {{ reviews.length }}
+                                            <template v-if="reviews && reviews.length && reviews.length.toString().slice(-1) === '1'">
+                                                отзыв
+                                            </template>
+                                            <template v-if="reviews && reviews.length && reviews.length.toString().slice(-1) === '2' || reviews.length.toString().slice(-1) === '3' || reviews.length.toString().slice(-1) === '4'">
+                                                отзыва
+                                            </template>
+                                            <template v-if="reviews && reviews.length && reviews.length.toString().slice(-1) === '5' || reviews.length.toString().slice(-1) === '6' || reviews.length.toString().slice(-1) === '7' || reviews.length.toString().slice(-1) === '8' || reviews.length.toString().slice(-1) === '9' || reviews.length.toString().slice(-1) === '0'">
+                                                отзывов
+                                            </template>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -266,8 +302,45 @@
                             <div class="col-12 col-md-4">
                                 <h2 class="mb-2">Отзывы</h2>
                             </div>
-                            <div class="col-12 col-md-8">
-                                Здесь будут отзывы.
+                            <div class="col-12 col-md-6">
+                                {{ reviews }}
+                                <div class="review_form">
+                                    <div class="mb-3">
+                                        <label class="form-label">Имя:</label>
+                                        <input v-model="review_name" type="text" class="form-control" placeholder="Имя">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Оценка:</label><br/>
+                                        <div class="form-check form-check-inline">
+                                            <input v-model="review_star" class="form-check-input" type="radio" id="review_star1" value="1">
+                                            <label class="form-check-label" for="review_star1">1</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input v-model="review_star" class="form-check-input" type="radio" id="review_star2" value="2">
+                                            <label class="form-check-label" for="review_star2">2</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input v-model="review_star" class="form-check-input" type="radio" id="review_star3" value="3">
+                                            <label class="form-check-label" for="review_star3">3</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input v-model="review_star" class="form-check-input" type="radio" id="review_star4" value="4">
+                                            <label class="form-check-label" for="review_star4">4</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input v-model="review_star" class="form-check-input" type="radio" id="review_star5" value="5">
+                                            <label class="form-check-label" for="review_star5">5</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Отзыв:</label>
+                                        <textarea v-model="review_text" class="form-control" placeholder="Отзыв"></textarea>
+                                    </div>
+                                    
+                                    <button @click="saveReview()" class="btn btn-standard">Отправить отзыв</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -288,6 +361,8 @@ export default {
         return {
             product: {},
             price: '',
+            reviews: [],
+            rating: '',
             ProductColorHooper: {
                 itemsToShow: 1,
                 transition: 250,
@@ -298,6 +373,10 @@ export default {
             modal_kakoplatit: false,
             modal_zamer: false,
             modal_zvonok: false,
+
+            review_star: '',
+            review_text: '',
+            review_name: '',
         };
     },
     created() {
@@ -307,6 +386,7 @@ export default {
                     this.product = response.data,
                     this.price = this.product.base_price
                 ));
+            this.getReviews()
         },
     methods: {
         chooseColor(index, id, name, price) {
@@ -389,7 +469,35 @@ export default {
             }
             document.getElementById(selected_tab).classList.add('active')
             document.getElementById(selected_tab).classList.add('show')
-        }
+        },
+        getReviews() {
+            axios
+                .get(`/api/product/${this.$route.params.id}/reviews`)
+                .then((response => {
+                    this.reviews = response.data
+                    this.rating = this.reviews.reduce((a, b) => +a + +b.star, 0) / this.reviews.length
+                }))
+        },
+        saveReview() {
+            if(this.review_name.length && this.review_text.length && this.review_star.length) {
+                axios
+                .post(`/api/product/${this.product.id}/add_review`, { review_name: this.review_name, review_text: this.review_text, review_star: this.review_star })
+                .then(response => (
+                    this.review_name = '',
+                    this.review_text = '',
+                    this.review_star = ''
+                ))
+                .catch((error) => {
+                    if(error.response) {
+                        for(var key in error.response.data.errors){
+                            console.log(key)
+                        }
+                    }
+                });
+            } else {
+                alert('Заполните отзыв')
+            }
+        },
     },
     components: {
         Hooper,

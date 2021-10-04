@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Review extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'text',
+        'star'
+    ];
+
+    public function products()
+    {
+        return $this->belongsToMany('App\Models\Product');
+    }
 }

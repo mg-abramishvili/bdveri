@@ -259,6 +259,9 @@ html, body {
 .rating .star-half {
     background-image: url('/img/star-half.svg');
 }
+.rating .star-blank {
+    background-image: url('/img/star-blank.svg');
+}
 .rating .score {
     font-size: 15px;
     line-height: 1;
@@ -291,5 +294,9 @@ html, body {
 .btn-addtocart {
     display: inline-block;
     vertical-align: middle;
+}
+.review_form textarea.form-control {
+    resize: none;
+    height: 150px;
 }
 /* Product Item */

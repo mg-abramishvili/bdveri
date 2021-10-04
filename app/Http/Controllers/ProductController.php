@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Review;
 use App\Models\Color;
 use App\Models\Size;
 use App\Models\Style;
@@ -235,4 +236,36 @@ class ProductController extends Controller
         return Construct::all();
     }
 
+    public function all_reviews()
+    {
+        return Review::all();
+    }
+
+    public function product_reviews($id, Request $request)
+    {
+        return Review::whereRelation('products', 'product_id', $id)->get();
+    }
+
+    public function add_review($id, Request $request)
+    {
+        $rules = [
+            'review_name' => 'required',
+            'review_text' => 'required',
+            'review_star' => 'required|numeric',
+        ];
+
+        $this->validate($request, $rules);
+
+        $data = request()->all();
+        $product = Product::find($id);
+        
+        $review = new Review([
+            'name' => $data['review_name'],
+            'text' => $data['review_text'],
+            'star' => $data['review_star'],
+        ]);
+
+        $review->save();
+        $product->reviews()->attach($review->id, ['product_id' => $product->id]);
+    }
 }
